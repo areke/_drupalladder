@@ -1,0 +1,4 @@
+name = Learn Glue
+description = Glue module for Learn install profile
+core = 7.x
+package = Learn

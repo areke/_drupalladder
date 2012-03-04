@@ -1,0 +1,109 @@
+<?php
+
+/**
+ * @file
+ * Displays a curriculum node in the form of a ladder.
+ */
+
+
+/**
+ * Implements hook_menu().
+ */
+function ladder_menu() {
+  $items['ladder/%'] = array(
+    'page callback' => 'ladder_page_view',
+    'page arguments' => array(1),
+    'access callback' => 'node_access',
+    'access arguments' => array('view', 1),
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+/*
+function ladder_theme() {
+}
+// */
+
+/**
+ * Callback for path: ladder/[id].
+ * 
+ * @param $id
+ *  String. Node id or UUID for a curriculum node.
+ * 
+ * @return $build
+ *  TODO Renderable array.
+ */
+function ladder_page_view($id) {
+  // Get node id.
+  if (is_numeric($id)) {
+    // $id is a node id.
+    $nid = $id;
+  }
+  else {
+    // $id is either a UUID or it is not valid.
+    $nids = entity_get_id_by_uuid('node', array($id));
+    $nid = $nids[$id];
+  }
+
+  // Load requested node.
+  if (!$node = node_load($nid)) {
+    // Node didn't load. Return error message.
+    $path = current_path();
+    $text = t('@path is not a valid path. @id must be a valid curriculum node ID or UUID.', array('@path' => $path, '@id' => $id));
+    drupal_set_message($text, 'warning');
+    return '';
+  }
+
+  // Make sure node is a curriculum.
+  if (!$node->type == 'curriculum') {
+    // Not a valid node type. Return error message.
+    $text = t('!name is not a curriculum.', array('!name' => l(check_plain($node->title), "node/$node->nid")));
+    drupal_set_message($text, 'warning');
+    return '';
+  }
+
+  drupal_set_title(t('Ladder for @curriculum', array('@curriculum' => $node->title)));
+
+  // Curriculum overview.
+  $output = render(field_view_field('node', $node, 'field_curriculum_overview'));
+
+  if ($lessons = field_get_items('node', $node, 'field_curriculum_lessons')) {
+    // Lessons are displayed in reverse order.
+    krsort($lessons);
+    foreach ($lessons as $lesson) {
+      // Build row from lesson node.
+      $lesson = node_load($lesson['target_id']);
+      $row = array();
+      $row['title'] = l($lesson->title, 'node/' . $lesson->nid);
+      $row['flag'] = flag_create_link('lessons_complete', $lesson->nid);
+      $rows[] = $row;
+    }
+  }
+
+  // Generate output.
+  if (empty($rows)) {
+    $output .= t('There are no lessons in this curriculum.');
+  }
+  else {
+    drupal_add_css(drupal_get_path('module', 'ladder') . '/ladder.css');
+    // Top of the ladder.
+    $output .= '<div class="ladder"><div class="ladder-top">';
+    $output .= '</div></div>';
+    // Ladder rungs.
+    foreach ($rows as $row) {
+      // @todo add status based on flag.
+      $output .= '<div class="ladder clearfix"><div class="ladder-rung"></div>';
+      $output .= '<span class="title">' . $row['title'] .'</span>';
+      $output .= '<span class="flag">'. $row['flag'] . '</span>';
+      $output .= '</div>';
+    }
+    // Bottom of the ladder.
+    $output .= '<div class="ladder"><div class="ladder-bottom">';
+    $output .= '</div></div>';
+  }
+
+  return $output;
+}
