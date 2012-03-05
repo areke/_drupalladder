@@ -26,10 +26,6 @@ function learn_glue_block_view($delta = '') {
     case 'learn_glue_contribute':
       $links = array();
       $links[] = array(
-        'href' => '#',
-        'title' => t('Help administer learndrupal.org (COMING SOON...)'),
-      );
-      $links[] = array(
         'href' => 'http://drupal.org/project/issues/learn',
         'title' => t('Learn install profile issue queue'),
       );

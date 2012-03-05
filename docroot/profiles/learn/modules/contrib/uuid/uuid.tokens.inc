@@ -92,5 +92,9 @@ function uuid_tokens($type, $tokens, array $data = array(), array $options = arr
       break;
   }
 
+  // Prevent undefined index warning. Note: This section is rewritten in the dev branch
+  // of uuid. So this patch shouldn't be necessary after 7.x-1.0-alpha3.
+  $replacements = (empty($replacements)) ? array() : $replacements; 
+
   return $replacements;
 }
