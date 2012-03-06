@@ -47,7 +47,10 @@ projects[lessons][download][url] = http://git.drupal.org/project/lessons.git
 projects[lessons][download][branch] = 7.x-1.x
 projects[lessons][subdir] = contrib
 
-projects[node_export][patch] = http://drupal.org/files/fix-scary-error-message-1467976-1.patch
+projects[node_export][type] = module
+projects[node_export][download][type] = git
+projects[node_export][download][url] = http://git.drupal.org/project/node_export.git
+projects[node_export][download][revision] = 301c61096282cebfdfd23ee64aef7d194f3138e7
 projects[node_export][subdir] = contrib
 
 projects[pathauto][subdir] = contrib

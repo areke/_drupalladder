@@ -44,6 +44,7 @@ dependencies[] = lessons
 dependencies[] = pathauto
 dependencies[] = token
 dependencies[] = node_export
+dependencies[] = node_export_serialize
 dependencies[] = node_export_features
 ; dependencies[] = services
 dependencies[] = strongarm
@@ -68,6 +69,9 @@ dependencies[] = learn_glue
 
 ; custom features
 ; ----------------
+dependencies[] = learn_default_site_settings
+dependencies[] = learn_lesson_content
+dependencies[] = learn_node_export_settings
 dependencies[] = learn_page
 dependencies[] = learn_text_format_filters
 
