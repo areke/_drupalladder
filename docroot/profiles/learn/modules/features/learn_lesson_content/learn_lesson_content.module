@@ -13,8 +13,7 @@ function learn_lesson_content_menu() {
     'title' => 'Drupal Ladder',
     'page callback' => 'ladder_page_view',
     'page arguments' => array('ee503327-50be-1904-8d04-9499098cad64'),
-    'access callback' => 'node_access',
-    'access arguments' => array('view', 1),
+    'access arguments' => array('access content'),
     'menu_name' => 'main-menu',
     'weight' => '2',
   );
