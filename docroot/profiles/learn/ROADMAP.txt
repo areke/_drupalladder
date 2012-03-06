@@ -1,25 +1,14 @@
 To-Do's Before Drupalcon Denver
 -------------------------------
 
-                            Client    v.     Warehouse 
-                           ----------------------------  
-Services                                         x 
-Services content             x
-Services info                                    x
-Services get content views                       x
-Services get lessons         x
-
 Lessons
 ---------
 
     - readme
 
-    - admin settings              lessons_accept_recommendations
-                                    lessons_url_for_recommendations
     features:
 
       x lessons_lesson:             basic lesson content type
-          - uuid path
       x lessons_lesson_info:        lesson info field set, fields and taxonomy terms
       x lessons_lesson_prereqs:     lesson prerequisites field set and fields
       x lessons_curriculum:         content type & related taxonomy fields

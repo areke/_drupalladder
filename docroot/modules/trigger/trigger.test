@@ -11,7 +11,7 @@
 class TriggerWebTestCase extends DrupalWebTestCase {
 
   /**
-   * Configures an advanced action.
+   * Configure an advanced action.
    *
    * @param $action
    *   The name of the action callback. For example: 'user_block_user_action'

@@ -2,14 +2,13 @@
 
 Drupal.behaviors.tableSelect = {
   attach: function (context, settings) {
-    // Select the inner-most table in case of nested tables.
-    $('th.select-all', context).closest('table').once('table-select', Drupal.tableSelect);
+    $('table:has(th.select-all)', context).once('table-select', Drupal.tableSelect);
   }
 };
 
 Drupal.tableSelect = function () {
   // Do not add a "Select all" checkbox if there are no rows with checkboxes in the table
-  if ($('td input:checkbox', this).length == 0) {
+  if ($('td input:checkbox', this).size() == 0) {
     return;
   }
 
@@ -70,7 +69,7 @@ Drupal.tableSelectRange = function (from, to, state) {
     }
 
     // Either add or remove the selected class based on the state of the target checkbox.
-    $(i).toggleClass('selected', state);
+    $(i)[ state ? 'addClass' : 'removeClass' ]('selected');
     $('input:checkbox', i).each(function () {
       this.checked = state;
     });

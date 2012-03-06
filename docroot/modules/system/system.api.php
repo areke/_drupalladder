@@ -1200,23 +1200,22 @@ function hook_menu_get_item_alter(&$router_item, $path, $original_map) {
  *       "default" task, which should display the same page as the parent item.
  *     If the "type" element is omitted, MENU_NORMAL_ITEM is assumed.
  *   - "options": An array of options to be passed to l() when generating a link
- *     from this menu item. Note that the "options" parameter has no effect on
- *     MENU_LOCAL_TASK, MENU_DEFAULT_LOCAL_TASK, and MENU_LOCAL_ACTION items.
+ *     from this menu item.
  *
  * For a detailed usage example, see page_example.module.
  * For comprehensive documentation on the menu system, see
  * http://drupal.org/node/102338.
  */
 function hook_menu() {
-  $items['example'] = array(
-    'title' => 'Example Page',
-    'page callback' => 'example_page',
+  $items['blog'] = array(
+    'title' => 'blogs',
+    'page callback' => 'blog_page',
     'access arguments' => array('access content'),
     'type' => MENU_SUGGESTED_ITEM,
   );
-  $items['example/feed'] = array(
-    'title' => 'Example RSS feed',
-    'page callback' => 'example_feed',
+  $items['blog/feed'] = array(
+    'title' => 'RSS feed',
+    'page callback' => 'blog_feed',
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );

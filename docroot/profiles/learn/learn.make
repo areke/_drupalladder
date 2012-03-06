@@ -65,5 +65,6 @@ projects[strongarm][subdir] = contrib
 ; uuid patch: fixes ugly red undefined variable error on install. Should be unnecessary after 7.x-1.0-alpha3
 projects[uuid][patch][] = https://raw.github.com/gist/1974649/8fcc511144638b40b7e951daedf3e821875c611e/uuid-fix-undefined-variable-error.patch
 projects[uuid][subdir] = contrib
+projects[uuid][version] = 1.0-alpha3
 
 projects[views][subdir] = contrib
