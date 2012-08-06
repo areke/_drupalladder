@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Learn Node Export Settings feature.
- */
-
-include_once('learn_node_export_settings.features.inc');
