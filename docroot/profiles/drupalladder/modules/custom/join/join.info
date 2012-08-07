@@ -1,0 +1,4 @@
+name = Drupal Ladder: Join
+description = Links to tell people how to get involved and contribute to the project.
+core = 7.x
+package = Drupal Ladder

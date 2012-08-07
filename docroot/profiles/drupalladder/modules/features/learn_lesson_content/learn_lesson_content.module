@@ -1,0 +1,23 @@
+<?php
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function learn_lesson_content_menu() {
+  $items = array();
+
+  $items['ladder/ee503327-50be-1904-8d04-9499098cad64'] = array(
+    'title' => 'Drupal Ladder',
+    'page callback' => 'ladder_page_view',
+    'page arguments' => array('ee503327-50be-1904-8d04-9499098cad64'),
+    'access arguments' => array('access content'),
+    'menu_name' => 'main-menu',
+    'weight' => '2',
+  );
+
+  return $items;
+}
+ 

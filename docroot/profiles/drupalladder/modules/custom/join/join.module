@@ -1,0 +1,101 @@
+<?php
+/**
+ * @file join.module
+ */
+
+/**
+ * Implements hook_block_info().
+ */
+function join_block_info() {
+  $blocks = array();
+  $blocks['join_contribute'] = array(
+    'info' => t('Contribute'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['join_download'] = array(
+    'info' => t('Download'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+  $blocks['join_join'] = array(
+    'info' => t('Join'),
+    'cache' => DRUPAL_CACHE_GLOBAL,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function join_block_view($delta = '') {
+  $block = array();
+
+  switch ($delta) {
+    case 'join_contribute':
+      $block['subject'] = t('Contribute');
+      $links = array();
+      $links[] = array(
+        'href' => 'http://drupal.org/project/issues/drupalladder',
+        'title' => t('Drupal Ladder install profile issue queue'),
+      );
+      $links[] = array(
+        'href' => 'http://drupal.org/project/issues/learn',
+        'title' => t('Learn install profile issue queue'),
+      );
+      $links[] = array(
+        'href' => 'http://drupal.org/project/issues/ladder',
+        'title' => t('Ladder module issue queue'),
+      );
+      $links[] = array(
+        'href' => 'http://drupal.org/project/issues/lessons',
+        'title' => t('Lessons module issue queue'),
+      );
+      break;
+
+    case 'join_download':
+      $block['subject'] = t('Download');
+      $links = array();
+      $links[] = array(
+        'href' => 'http://drupal.org/project/drupalladder',
+        'title' => t('Drupal Ladder'),
+      );
+      $links[] = array(
+        'href' => 'http://drupal.org/project/issues/learn',
+        'title' => t('Learn (the base profile for Drupal Ladder)'),
+      );
+      $links[] = array(
+        'href' => 'http://drupal.org/project/issues/ladder',
+        'title' => t('Ladder module'),
+      );
+      $links[] = array(
+        'href' => 'http://drupal.org/project/issues/lessons',
+        'title' => t('Lessons module'),
+      );
+      break;
+
+    case 'join_join':
+      $block['subject'] = t('Join');
+      $links = array();
+      $links[] = array(
+        'href' => 'http://groups.drupal.org/drupal-ladder',
+        'title' => t('Drupal Ladder Initiative on groups.drupal.org'),
+      );
+      $links[] = array(
+        'href' => 'http://drupalladder.org/chat',
+        'title' => t('#drupal-ladder on IRC'),
+      );
+      $links[] = array(
+        'href' => 'http://twitter.com/#!/search/%23DrupalLadder',
+        'title' => t('#DrupalLadder on Twitter'),
+      );
+      break;
+
+  }
+
+  $block['content'] = array(
+    '#theme' => 'links',
+    '#links' => $links,
+  );
+
+  return $block;
+}

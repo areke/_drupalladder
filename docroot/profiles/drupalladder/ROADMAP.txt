@@ -1,0 +1,117 @@
+============================================================================
+      Drupal Ladder 1.0 Roadmap: Minimum Viable Product 
+============================================================================
+
+
+  About the Roadmap and 1.0 Development Process
+  ----------------------------------------------
+
+    Target date for 1.0 release: August 2012 (before Drupalcon Munich)
+
+    For release 1.0 we're aiming for a solid, stable "minimum viable 
+    product" (MVP). The features listed here are all considered critical
+    MVP Features.
+
+    If you believe there is a critical MVP feature missing from this workplan
+    please propose it in the issue queue here:
+    
+      http://drupal.org/projects/issues/drupalladder
+
+    To streamline the feature development process, each MVP feature has a 
+    maintainer. Maintainers are maintaining their own copy of the project
+    (in drupal.org Git sandboxes). After their features have been reviewed
+    and tested by the community, these features are merged into the main 
+    project's 7.x-1.x branch.
+
+
+  Versions and timline
+  ---------------------
+
+ 
+    learn v. drupalladder   This project is a fork of the learn project on drupal.org.
+                            bryanhirsch tried making drupalladder a sub-profile of 
+                     learn using profiler module. Unfortunately, profiler has not kept pace
+                     with Drush 5 and the drupal.org distro/make/build process. We just don't
+                     have the time to pursue this further for 1.0 Looking ahead beyond 1.0,
+                     there would be a lot of benefit to separating the light LMS framework emerging
+                     here from the drupalladder.org content and Drupal-specific lessons. Learn
+                     (drupal.org/project/learn) seems like the natural place for the LMS-type
+                     stuff to live.
+
+                     For anyone interested in pursuing the base profile + sub profile archtecture,
+                     the preliminary work done here is available in the git repository, see the 
+                     learn project branch called "base-profile" and the drupalladder project branch
+                     called "sub-profile".
+
+    7.x-1.0-alphaX    During alpha development, the project is open for new
+                      MVP feature suggestions. Post requests in the queue,
+                      create proof-of-concept feature branches for new ideas,
+                      all ideas are fair game.
+
+                      Lesson content on drupalladder.org will be maintained through
+                      updates. Hopefully comments will be maintainable too. But 
+                      there are no promises for full version-to-version update paths.
+                      Maintain your own production Learn site at your own risk.
+
+                      Projection: Alpha developent will take place March 2012 - June 2012.
+
+
+    7.x-1.0-betaX     Feature freeze. Fix bugs until we're ready to release a stable 
+                      version 1.0. Developers will attempt to provide update paths from 
+                      version to version, but maintain a production Learn site at your own
+                      risk.
+
+                      Cool ideas for shiny new features that didn't make it in yet are up 
+                      for consideration in the 7.x-2.x branch.
+
+                      Projection: Beta developent will take place July 2012.
+
+
+    7.x-1.0           Projected release dates: 
+                        7.x-1.0-rc1, August 1, 2012
+                        7.x-1.0-rc2, August 10, 2012
+                        7.x-1.0, August 20, 2012
+
+
+  Summary
+  --------
+
+    +-------------------------------------+--------------+------------------+----------------+
+    | MVP Feature                         | Issue #      | Maintainer       | Status         |
+    +-------------------------------------+--------------+------------------+----------------+
+    | Cannonical "recommended" lessons    | 1495642      |                  | in progress    |
+    | Content access/maintainership       | 1495664      | jeffschuler      | in progress    |
+    | Content workflow                    | 1524264      | dgoutam          | in progress    |
+    | Design                              |              |                  |                |
+    | Ladder user experience              |              |                  |                |
+    | Learn Drupal default lesson content | 1533548      | kay_v            | in progress    |
+    | Learn Drupal user experience        |              |                  |                |  
+    | Lessons image support               |              |                  |                |
+    | Lessons user experience             |              |                  |                |
+    | Lessons video support               | 1533568      |                  | not started    |
+    | UUID integration                    | 1470706      | Darko            | in progress    |
+    +-------------------------------------+--------------+------------------+----------------+
+
+    (For more detail about each of these features and links to feature development branches
+    see descriptions below.)
+
+
+  TODO add descriptions for MVP features and links to sandboxes here.
+
+    
+
+============================================================================
+      Additional Feature Ideas
+============================================================================
+
+
+    Additional feature ideas, not yet slated for a particular release
+    -----------------------------------------------------------------
+
+      - Multilingual
+      - RDF for data sharing
+      - Ability to publish to a learning registry
+      - On installation make lesson content optional
+      - Subscribe to a lesson on drupalladder.org (or other public Learn sites) 
+          and get updates to your local site
+      - Subscribe to a lesson on drupalladder.org and get update notifications
