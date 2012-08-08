@@ -21,9 +21,10 @@ function lessons_draft_status_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Draft Status',
-    'weight' => '-700',
+    'weight' => '2',
     'children' => array(
       0 => 'field_lesson_draft_status',
+      1 => 'field_lesson_last_peer_review',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

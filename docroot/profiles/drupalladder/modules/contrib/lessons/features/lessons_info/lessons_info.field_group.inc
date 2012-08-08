@@ -10,7 +10,7 @@
 function lessons_info_field_group_info() {
   $export = array();
 
-  $field_group = new stdClass;
+  $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
   $field_group->identifier = 'group_lesson_info|node|lesson|form';
@@ -21,13 +21,13 @@ function lessons_info_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Lesson info',
-    'weight' => '1',
+    'weight' => '3',
     'children' => array(
       0 => 'field_lesson_drupal_version',
       1 => 'field_lesson_project_name',
       2 => 'field_lesson_project_type',
-      3 => 'field_lesson_type',
-      4 => 'field_lesson_tags',
+      3 => 'field_lesson_tags',
+      4 => 'field_lesson_type',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

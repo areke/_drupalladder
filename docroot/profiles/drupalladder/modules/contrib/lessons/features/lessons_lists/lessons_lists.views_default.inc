@@ -298,6 +298,58 @@ function lessons_lists_views_default_views() {
   $handler->display->display_options['fields']['count']['hide_alter_empty'] = 1;
   $handler->display->display_options['fields']['count']['format_plural'] = 0;
   $handler->display->display_options['fields']['count']['prefix'] = '+';
+  /* Field: Draft Status (key / css class) */
+  $handler->display->display_options['fields']['field_lesson_draft_status']['id'] = 'field_lesson_draft_status';
+  $handler->display->display_options['fields']['field_lesson_draft_status']['table'] = 'field_data_field_lesson_draft_status';
+  $handler->display->display_options['fields']['field_lesson_draft_status']['field'] = 'field_lesson_draft_status';
+  $handler->display->display_options['fields']['field_lesson_draft_status']['ui_name'] = 'Draft Status (key / css class)';
+  $handler->display->display_options['fields']['field_lesson_draft_status']['label'] = '';
+  $handler->display->display_options['fields']['field_lesson_draft_status']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['alter_text'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_lesson_draft_status']['type'] = 'list_key';
+  $handler->display->display_options['fields']['field_lesson_draft_status']['field_api_classes'] = 0;
+  /* Field: Content: Draft Status */
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['id'] = 'field_lesson_draft_status_1';
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['table'] = 'field_data_field_lesson_draft_status';
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['field'] = 'field_lesson_draft_status';
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['text'] = '<div class="lesson"><div class="lesson-draft-status-sample lesson-draft-status-[field_lesson_draft_status]" ></div></div>';
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['make_link'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['element_label_colon'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['element_default_classes'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['empty'] = '<div class="lesson"><div class="lesson-draft-status-sample lesson-draft-status-not-available" ></div></div>';
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['field_api_classes'] = 0;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -364,6 +416,23 @@ function lessons_lists_views_default_views() {
   $handler->display->display_options['filters']['field_lesson_drupal_version_value']['expose']['operator'] = 'field_lesson_drupal_version_value_op';
   $handler->display->display_options['filters']['field_lesson_drupal_version_value']['expose']['identifier'] = 'drupal_version';
   $handler->display->display_options['filters']['field_lesson_drupal_version_value']['expose']['reduce'] = 0;
+  /* Filter criterion: Content: Draft Status (field_lesson_draft_status) */
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['id'] = 'field_lesson_draft_status_value';
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['table'] = 'field_data_field_lesson_draft_status';
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['field'] = 'field_lesson_draft_status_value';
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['value'] = array(
+    'all' => 'all',
+    'draft' => 'draft',
+    'ready-for-review' => 'ready-for-review',
+    'needs-revision' => 'needs-revision',
+    'up-to-date' => 'up-to-date',
+  );
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['expose']['operator_id'] = 'field_lesson_draft_status_value_op';
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['expose']['label'] = 'Draft Status';
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['expose']['operator'] = 'field_lesson_draft_status_value_op';
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['expose']['identifier'] = 'lesson_draft_status';
+  $handler->display->display_options['filters']['field_lesson_draft_status_value']['expose']['reduce'] = 0;
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');

@@ -12,9 +12,9 @@ features[flag][] = "lessons_complete"
 features[views_view][] = "lessons_completed"
 
 stylesheets[all][] = lessons_completed-styles.css
-; Information added by drupal.org packaging script on 2012-04-14
-version = "7.x-1.0-alpha2"
+; Information added by drupal.org packaging script on 2012-08-05
+version = "7.x-1.0-alpha5"
 core = "7.x"
 project = "lessons"
-datestamp = "1334429198"
+datestamp = "1344202931"
 

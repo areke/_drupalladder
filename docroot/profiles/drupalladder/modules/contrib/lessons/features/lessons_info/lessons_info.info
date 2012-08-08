@@ -15,14 +15,15 @@ features[ctools][] = "field_group:field_group:1"
 features[field][] = "node-lesson-field_lesson_drupal_version"
 features[field][] = "node-lesson-field_lesson_project_name"
 features[field][] = "node-lesson-field_lesson_project_type"
+features[field][] = "node-lesson-field_lesson_tags"
 features[field][] = "node-lesson-field_lesson_type"
 features[field_group][] = "group_lesson_info|node|lesson|form"
 features[taxonomy][] = "lesson_tags"
 features[taxonomy][] = "tags"
 
-; Information added by drupal.org packaging script on 2012-04-14
-version = "7.x-1.0-alpha2"
+; Information added by drupal.org packaging script on 2012-08-05
+version = "7.x-1.0-alpha5"
 core = "7.x"
 project = "lessons"
-datestamp = "1334429198"
+datestamp = "1344202931"
 

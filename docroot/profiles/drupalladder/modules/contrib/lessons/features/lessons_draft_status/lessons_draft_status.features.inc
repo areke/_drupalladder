@@ -8,5 +8,8 @@
  * Implements hook_ctools_plugin_api().
  */
 function lessons_draft_status_ctools_plugin_api() {
-  return array("version" => "1");
+  list($module, $api) = func_get_args();
+  if ($module == "field_group" && $api == "field_group") {
+    return array("version" => "1");
+  }
 }
