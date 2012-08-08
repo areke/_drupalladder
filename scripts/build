@@ -5,21 +5,23 @@
  *  ./build 1.0-alpha8
  */
 
+require_once('scripts.settings.php');
 main($argv);
 
 /**
  * 
  */
 function main($argv) {
-  $version = $argv[1];
-  $drupal_version = '7.x';
-  $my_profile = 'drupalladder';
-  $profile_name = 'Drupal Ladder';
-
-  $path = dirname(dirname(__FILE__));
-  $docroot = $path . '/docroot';
-  $profile = $path . '/docroot/profiles/' . $my_profile;
-  $build_make = sprintf('%s/build/build-%s-%s-%s.make', $path, $my_profile, $drupal_version, $version);
+  $conf = _scripts_conf($argv);
+  
+  $version = $conf->version;
+  $drupal_version = $conf->drupal_version;
+  $my_profile = $conf->my_profile;
+  $profile_name = $conf->profile_name;
+  $path = $conf->path;
+  $docroot = $conf->docroot;
+  $profile = $conf->profile;
+  $build_make = $conf->build_make;
 
   printf("\n\nRebuild %s %s-%s...\n\n", $profile_name, $drupal_version, $version);
 
