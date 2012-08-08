@@ -11,7 +11,7 @@ api = 2
 
 ; Contrib projects
 ; ----------------
-projects[ctools][version] = 1.0-rc2
+projects[ctools][version] = 1.0
 projects[ctools][subdir] = contrib
 
 projects[devel][version] = 1.2
@@ -20,16 +20,16 @@ projects[devel][subdir] = contrib
 projects[diff][version] = 2.0
 projects[diff][subdir] = contrib
 
-projects[entity][version] = 1.0-rc1
+projects[entity][version] = 1.0-rc3
 projects[entity][subdir] = contrib
 
-projects[entityreference][version] = 1.0-rc1
+projects[entityreference][version] = 1.0-rc3
 projects[entityreference][subdir] = contrib
 
 projects[examples][version] = 1.x-dev
 projects[examples][subdir] = contrib
 
-projects[features][version] = 1.0-rc1
+projects[features][version] = 1.0
 projects[features][subdir] = contrib
 
 projects[feeds][version] = 2.0-alpha4
@@ -38,7 +38,7 @@ projects[feeds][subdir] = contrib
 projects[field_group][version] = 1.1
 projects[field_group][subdir] = contrib
 
-projects[flag][version] = 2.0-beta6
+projects[flag][version] = 2.0-beta8
 projects[flag][subdir] = contrib
 
 projects[job_scheduler][version] = 2.0-alpha2
@@ -47,7 +47,7 @@ projects[job_scheduler][subdir] = contrib
 projects[ladder][version] = 1.0-alpha2
 projects[ladder][subdir] = contrib
 
-projects[lessons][version] = 1.0-alpha2
+projects[lessons][version] = 1.0-alpha6
 projects[lessons][subdir] = contrib
 
 projects[mollom][version] = 2.0
@@ -65,16 +65,10 @@ projects[node_export][subdir] = contrib
 projects[panels][version] = 3.2
 projects[panels][subdir] = contrib
 
-projects[pathauto][version] = 1.0
+projects[pathauto][version] = 1.1
 projects[pathauto][subdir] = contrib
 
-projects[rules][type] = module
-projects[rules][download][type] = git
-; Rules version 7.x-2.x-dev including commit:
-; http://drupalcode.org/project/rules.git/commit/6050ca6
-; to remove rules.make file http://drupal.org/node/1329346
-projects[rules][download][branch] = 7.x-2.x
-projects[rules][download][revision] = 6050ca6ae22080879672fa698357f5ec41d4ff74
+projects[rules][version] = 2.2
 projects[rules][subdir] = contrib
 
 ; Not including Services module until http://drupal.org/node/1313976 lands
@@ -83,13 +77,13 @@ projects[rules][subdir] = contrib
 ;; services patch: this just adds a third-party library to the rest server /lib directory so it's ready to go without doing this step manually
 ;projects[services][patch][] = https://raw.github.com/gist/1973788/8e9f8cc095ed3cb4d243639196a51b30a97ce97d/services.spyc.patch
 
-projects[strongarm][version] = 2.0-beta5
+projects[strongarm][version] = 2.0
 projects[strongarm][subdir] = contrib
 
-projects[token][version] = 1.0-rc1
+projects[token][version] = 1.1
 projects[token][subdir] = contrib
 
-projects[nodeaccess_userreference][version] = 3.6
+projects[nodeaccess_userreference][version] = 3.8
 projects[nodeaccess_userreference][subdir] = contrib
 
 projects[uuid][type] = module

@@ -57,6 +57,7 @@ dependencies[] = uuid
 dependencies[] = lessons_bookmarks
 dependencies[] = lessons_completed
 dependencies[] = lessons_curriculum
+dependencies[] = lessons_draft_status
 dependencies[] = lessons_info
 dependencies[] = lessons_lesson
 dependencies[] = lessons_lists
