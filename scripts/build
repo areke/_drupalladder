@@ -1,0 +1,56 @@
+#!/usr/bin/php
+<?php
+/**
+ * Usage:
+ *  ./build 1.0-alpha8
+ */
+
+main($argv);
+
+/**
+ * 
+ */
+function main($argv) {
+  $version = $argv[1];
+
+  $path = dirname(dirname(__FILE__));
+  $docroot = $path . '/docroot';
+  $build_make = sprintf('%s/build/build-drupalladder-7.x-%s.make', $path, $version);
+
+  printf("\n\nRebuild Drupal Ladder 7.x-%s...\n\n", $version);
+
+  $commands = array(
+    'rm -rf docroot',                  // Remove old code base.
+    sprintf('drush make %s docroot', $build_make),  // Build new distro.
+    'rm -rf docroot/sites',     // Get rid of default sites directory.
+    sprintf('cd %s; ln -s ../sites/ sites; cd - ;', $docroot), // Set up simlink to /sites.
+    sprintf('ls -l %s/sites', $docroot), // Make sure the simlink is set up correctly.
+    'git checkout docroot/.ah_site_archive_imported',
+    'git add . ',
+    'git status ',
+    '# Resolve any conflicts before committing.',
+    sprintf('git commit -m "Update Drupal Ladder to version 7.x-%s"', $version),
+    sprintf('git tag -a 7.x-%s -m "Update Drupal Ladder to version 7.x-%s"', $version, $version),
+  );
+
+  foreach($commands as $command) {
+    //execute_command($command);
+    print $command . "\n";
+  }
+
+}
+
+/**
+ * Execute command and print results.
+ * 
+ * @param $command
+ *  String. Command to be run from the command line.
+ */
+function execute_command($command) {
+  echo "\nRunning:\n\t$command\n";
+  shell_exec($command);
+  // $result = exec($command, $output);
+  // printf("result: %s\n\n", print_r($result));
+  // printf("output: %s\n\n", print_r($output));
+}
+

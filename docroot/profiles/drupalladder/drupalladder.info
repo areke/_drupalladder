@@ -57,7 +57,6 @@ dependencies[] = uuid
 dependencies[] = lessons_bookmarks
 dependencies[] = lessons_completed
 dependencies[] = lessons_curriculum
-dependencies[] = lessons_draft_status
 dependencies[] = lessons_info
 dependencies[] = lessons_lesson
 dependencies[] = lessons_lists
@@ -80,3 +79,10 @@ dependencies[] = learn_text_format_filters
 ; files
 ; --------
 files[] = drupalladder.profile
+
+; Information added by drupal.org packaging script on 2012-08-04
+version = "7.x-1.0-alpha8"
+core = "7.x"
+project = "drupalladder"
+datestamp = "1344095239"
+
