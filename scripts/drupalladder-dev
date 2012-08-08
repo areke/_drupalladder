@@ -21,6 +21,7 @@ function main($argv) {
     sprintf('mv %s/.git %s/', $conf->my_profile, $conf->profile),
     sprintf('rm -rf %s', $conf->my_profile),
     sprintf("cd %s; %s;\n", $conf->profile, 'git reset --hard'),
+    sprintf('rm %s/.gitignore', $conf->profile),
   );
   foreach($commands as $command) {
     execute_command($command);
