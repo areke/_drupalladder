@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Lessons: Completed feature.
- */
-
-include_once('lessons_completed.features.inc');

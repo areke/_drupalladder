@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the Learn Default Site Settings feature.
- */
-
-include_once('learn_default_site_settings.features.inc');
