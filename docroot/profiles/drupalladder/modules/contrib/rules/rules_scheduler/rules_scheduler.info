@@ -17,5 +17,5 @@ files[] = includes/rules_scheduler_views_filter.inc
 version = "7.x-2.1+1-dev"
 core = "7.x"
 project = "rules"
-datestamp = "1344457796"
+datestamp = "1344457979"
 
