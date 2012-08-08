@@ -12,25 +12,30 @@ main($argv);
  */
 function main($argv) {
   $version = $argv[1];
+  $drupal_version = '7.x';
+  $my_profile = 'drupalladder';
+  $profile_name = 'Drupal Ladder';
 
   $path = dirname(dirname(__FILE__));
   $docroot = $path . '/docroot';
-  $build_make = sprintf('%s/build/build-drupalladder-7.x-%s.make', $path, $version);
+  $profile = $path . '/docroot/profile/' . $my_profile;
+  $build_make = sprintf('%s/build/build-%s-%s-%s.make', $path, $my_profile, $drupal_version, $version);
 
-  printf("\n\nRebuild Drupal Ladder 7.x-%s...\n\n", $version);
+  printf("\n\nRebuild %s %s-%s...\n\n", $profile_name, $drupal_version, $version);
 
   $commands = array(
     'rm -rf docroot',                  // Remove old code base.
     sprintf('drush make %s docroot', $build_make),  // Build new distro.
+    sprintf('cd %s; rm .gitignore;', $distro),  // Remove .gitignore from d.o.
     'rm -rf docroot/sites',     // Get rid of default sites directory.
-    sprintf('cd %s; ln -s ../sites/ sites; cd - ;', $docroot), // Set up simlink to /sites.
+    sprintf('cd %s; ln -s ../sites/ sites; cd %s;', $docroot, $path), // Set up simlink to /sites.
     sprintf('ls -l %s/sites', $docroot), // Make sure the simlink is set up correctly.
     'git checkout docroot/.ah_site_archive_imported',
     'git add . ',
     'git status ',
     '# Resolve any conflicts before committing.',
-    sprintf('git commit -m "Update Drupal Ladder to version 7.x-%s"', $version),
-    sprintf('git tag -a 7.x-%s -m "Update Drupal Ladder to version 7.x-%s"', $version, $version),
+    sprintf('git commit -m "Update %s to version %s-%s"', $profile_name, $drupal_version, $version),
+    sprintf('git tag -a %s-%s -m "Update %s to version %s-%s"', $drupal_version, $version, $profile_name, $drupal_version, $version),
   );
 
   foreach($commands as $command) {
