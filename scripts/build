@@ -18,7 +18,7 @@ function main($argv) {
 
   $path = dirname(dirname(__FILE__));
   $docroot = $path . '/docroot';
-  $profile = $path . '/docroot/profile/' . $my_profile;
+  $profile = $path . '/docroot/profiles/' . $my_profile;
   $build_make = sprintf('%s/build/build-%s-%s-%s.make', $path, $my_profile, $drupal_version, $version);
 
   printf("\n\nRebuild %s %s-%s...\n\n", $profile_name, $drupal_version, $version);
@@ -26,7 +26,7 @@ function main($argv) {
   $commands = array(
     'rm -rf docroot',                  // Remove old code base.
     sprintf('drush make %s docroot', $build_make),  // Build new distro.
-    sprintf('cd %s; rm .gitignore;', $distro),  // Remove .gitignore from d.o.
+    sprintf('rm %s/.gitignore;', $profile),  // Remove .gitignore from d.o.
     'rm -rf docroot/sites',     // Get rid of default sites directory.
     sprintf('cd %s; ln -s ../sites/ sites; cd %s;', $docroot, $path), // Set up simlink to /sites.
     sprintf('ls -l %s/sites', $docroot), // Make sure the simlink is set up correctly.
