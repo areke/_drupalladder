@@ -1,0 +1,15 @@
+name = Ladder 2
+description = Leadership ladder for learning about and contributing to Drupal.
+core = 7.x
+package = "Learn Drupal"
+project = "Ladder"
+dependencies[] = lessons_lesson
+dependencies[] = lessons_curriculum
+dependencies[] = lessons_completed
+
+; Information added by drupal.org packaging script on 2012-03-23
+version = "7.x-1.0-alpha2"
+core = "7.x"
+project = "ladder"
+datestamp = "1332546646"
+

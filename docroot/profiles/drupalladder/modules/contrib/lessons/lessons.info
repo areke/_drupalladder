@@ -1,0 +1,22 @@
+name = Lessons
+description = "Lessons includes a content type called 'lesson' and various features to extend lesson and make lessons useful for teaching people stuff. This module enables a recommended, standard set of lesson features."
+core = 7.x
+package = "Learn Drupal"
+project = "Lessons"
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = lessons_lesson
+dependencies[] = lessons_info
+dependencies[] = lessons_prerequisites
+dependencies[] = lessons_curriculum
+dependencies[] = lessons_bookmarks
+dependencies[] = lessons_recommendations
+dependencies[] = lessons_completed
+dependencies[] = lessons_lists
+
+; Information added by drupal.org packaging script on 2012-04-14
+version = "7.x-1.0-alpha2"
+core = "7.x"
+project = "lessons"
+datestamp = "1334429198"
+
