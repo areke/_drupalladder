@@ -1,0 +1,19 @@
+BRANCHES.txt
+------------
+
+7.x-1.x
+
+  Never merge in here. Only rebuild new releases from tagged releases of Drupal Ladder.
+
+  The only exception is if you're merging something NOT under the docroot 
+  (e.g. custom work inside sites like sites/default/modules, sites/default/themes, 
+  sites/default/settings.php, scripts, READMEs, etc.). 
+
+
+7.x-1.x-dev
+
+  Development branch. Test new builds and work on contrib projects here.
+
+  scripts/drupalladder-dev - This script makes drupalladder a git clone (reset to the tip of 7.x-1.x).
+
+  profiles/drupalladder/drupal-org-dev.make - Rebuild distro with the latest recommended release (rather than explicit version numbers).
