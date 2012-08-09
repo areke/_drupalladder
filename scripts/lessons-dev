@@ -1,15 +1,19 @@
 #!/usr/bin/php
 <?php
 
-main();
+require_once('scripts.settings.php');
+main($argv);
 
-function main() {
-  $path = '../docroot/profiles/drupalladder/modules/contrib/lessons/';
+function main($argv) {
+  $conf = _scripts_conf($argv);
+
+  $module_path = $conf->profile . '/modules/contrib/lessons';
   $commands = array(
     'git clone --recursive --branch 7.x-1.x bhirsch@git.drupal.org:project/lessons.git',
-    "mv lessons/.git $path",
+    "mv lessons/.git $module_path",
     'rm -rf lessons',
-    sprintf("cd %s; %s;\n", $path, 'git reset --hard'),
+    sprintf('rm %s/.gitignore', $module_path),
+    sprintf("cd %s; %s;\n", $module_path, 'git reset --hard'),
   );
   foreach($commands as $command) {
     execute_command($command);
