@@ -534,4 +534,5 @@ if (file_exists('/var/www/site-php')) {
   require('/var/www/site-php/bryanhirsch/bryanhirsch-settings.inc');
 }
 
-$conf['profile'] = 'drupalladder';
+//$conf['profile'] = 'drupalladder';
+$conf['install_profile'] = 'drupalladder';
