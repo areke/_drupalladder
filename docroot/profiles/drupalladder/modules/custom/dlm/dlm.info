@@ -1,0 +1,4 @@
+name = Drupal Ladder Maintenance
+description = Update functions and misc helpful stuff for Drupal Ladder distro maintenance.
+core = 7.x
+package = Drupal Ladder

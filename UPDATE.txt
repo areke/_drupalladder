@@ -1,6 +1,25 @@
 
-7.12-1.0-alpha3 
+Update 7.12-1.0-alpha3 to ___________
 
-  1. Update code to 1.0-alpha8. Run updbs, cache clears, drush uli. Click around.
+TEST
+  A. Update code from 7.12-1.0-alpha3 to 1.0-alpha8. Run updbs, cache clears, drush uli. Click around.
+       drush @bryanhirsch.prod cc all     # [ ] 
+       drush @bryanhirsch.prod uli        # [ ]
 
-  2. [continue here]
+  B. Deploy 1.0-alpha9(?) with dlm in it. Enable dlm module.
+       drush @bryanhirsch.prod en dlm -y  # [ ] 
+
+  C. Deploy 1.0-alpha10(?) with dlm_update_7001().
+       drush @bryanhirsch.prod updb       # [ ] 
+
+
+PROD
+  1. Update code from 7.12-1.0-alpha3 to 1.0-alpha8. Run updbs, cache clears, drush uli. Click around.
+       drush @bryanhirsch.prod cc all     # [ ] 
+       drush @bryanhirsch.prod uli        # [ ]
+
+  2. Deploy 1.0-alpha9(?) with dlm in it. Enable dlm module.
+       drush @bryanhirsch.prod en dlm -y  # [ ] 
+
+  3. Deploy 1.0-alpha10(?) with dlm_update_7001().
+       drush @bryanhirsch.prod updb       # [ ] 
