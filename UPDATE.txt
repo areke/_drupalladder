@@ -6,7 +6,7 @@ TEST
        drush @bryanhirsch.prod cc all     # [ ] 
        drush @bryanhirsch.prod uli        # [ ]
 
-  B. Deploy 1.0-alpha9(?) with dlm in it. Enable dlm module.
+  B. Deploy 1.0-alpha9 with dlm in it. Enable dlm module.
        drush @bryanhirsch.prod en dlm -y  # [ ] 
 
   C. Deploy 1.0-alpha10(?) with dlm_update_7001().

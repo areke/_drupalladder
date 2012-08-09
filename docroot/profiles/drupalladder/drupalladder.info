@@ -67,6 +67,7 @@ dependencies[] = lessons_uuid
 
 ; custom modules
 ; ---------------
+dependencies[] = dlm
 dependencies[] = join
 
 ; custom features
