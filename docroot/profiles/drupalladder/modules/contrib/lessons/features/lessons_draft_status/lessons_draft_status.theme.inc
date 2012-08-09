@@ -34,7 +34,8 @@ function lessons_draft_status_preprocess_field(&$variables) {
   && $element['#object']->type == 'lesson') {
     // Get info about last peer review.
     $node = $element['#object'];
-    if ($last_peer_review_timestamp = $node->field_lesson_last_peer_review['und'][0]['value']) {
+    if (!empty($node->field_lesson_last_peer_review['und'][0]['value'])) {
+      $last_peer_review_timestamp = $node->field_lesson_last_peer_review['und'][0]['value'];
       $last_peer_review = t('Last peer review') . ': ' . date('j M Y', $last_peer_review_timestamp);  
     }
     else {

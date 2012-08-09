@@ -14,10 +14,3 @@ features[ctools][] = "field_group:field_group:1"
 features[field][] = "node-lesson-field_lesson_overview"
 features[field][] = "node-lesson-field_lesson_steps"
 features[field_group][] = "group_steps|node|lesson|form"
-
-; Information added by drupal.org packaging script on 2012-08-05
-version = "7.x-1.0-alpha5"
-core = "7.x"
-project = "lessons"
-datestamp = "1344202931"
-

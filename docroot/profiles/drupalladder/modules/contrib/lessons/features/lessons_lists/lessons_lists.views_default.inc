@@ -330,7 +330,11 @@ function lessons_lists_views_default_views() {
   $handler->display->display_options['fields']['field_lesson_draft_status_1']['table'] = 'field_data_field_lesson_draft_status';
   $handler->display->display_options['fields']['field_lesson_draft_status_1']['field'] = 'field_lesson_draft_status';
   $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['alter_text'] = 1;
-  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['text'] = '<div class="lesson"><div class="lesson-draft-status-sample lesson-draft-status-[field_lesson_draft_status]" ></div></div>';
+  $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['text'] = '<div class="lesson">
+  <div class="lesson-draft-status-[field_lesson_draft_status]">
+    <div class="lesson-draft-status-sample" ></div>
+  </div>
+</div>';
   $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['absolute'] = 0;
   $handler->display->display_options['fields']['field_lesson_draft_status_1']['alter']['external'] = 0;

@@ -10,10 +10,3 @@ dependencies[] = "uuid"
 features[ctools][] = "strongarm:strongarm:1"
 features[variable][] = "pathauto_node_curriculum_pattern"
 features[variable][] = "pathauto_node_lesson_pattern"
-
-; Information added by drupal.org packaging script on 2012-08-05
-version = "7.x-1.0-alpha5"
-core = "7.x"
-project = "lessons"
-datestamp = "1344202931"
-
