@@ -1,7 +1,7 @@
 BRANCHES.txt
 ------------
 
-7.x-1.x
+7.x-1.x-build
 
   Never merge in here. Only rebuild new releases from tagged releases of Drupal Ladder.
 
@@ -10,7 +10,7 @@ BRANCHES.txt
   sites/default/settings.php, scripts, READMEs, etc.). 
 
 
-7.x-1.x-dev
+7.x-1.x
 
   Development branch. Test new builds and work on contrib projects here.
 
