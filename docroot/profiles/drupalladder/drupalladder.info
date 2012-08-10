@@ -61,6 +61,7 @@ dependencies[] = lessons_draft_status
 dependencies[] = lessons_info
 dependencies[] = lessons_lesson
 dependencies[] = lessons_lists
+dependencies[] = lessons_maintainers
 dependencies[] = lessons_prerequisites
 dependencies[] = lessons_recommendations
 dependencies[] = lessons_uuid

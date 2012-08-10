@@ -5,4 +5,10 @@
 
 /**
  * Implements hook_update_N().
+ * 
+ * Update 7000: Enable lessons_draft_status and lesson_maintainers module.
  */
+function dlm_update_7000(&$sandbox) {
+  $module_list = array('lessons_draft_status', 'lesson_maintainers');
+  module_enable($module_list);
+}
