@@ -28,6 +28,8 @@ function lessons_draft_status_theme($existing, $type, $theme, $path) {
 function lessons_draft_status_preprocess_field(&$variables) {
   $element = $variables['element'];
   
+dsm($element,'element');
+
   if ($element['#field_name'] == 'field_lesson_draft_status'
   && $element['#entity_type'] == 'node'
   && in_array('#object', array_keys($element))
@@ -71,13 +73,6 @@ function lessons_draft_status_preprocess_node(&$vars) {
     }
     else {
       $lesson_draft_status = 'not-available';  
-    }
-
-    // Value is set to 'Draft status not available' by lessons_modules_enabled() for
-    // lessons without a status. This has no human readable value
-    // since it's not a user-selectale option. Set value here.
-    if ($lesson_draft_status == 'Draft status not available') { 
-      $lesson_draft_status = 'not-available';
     }
 
     // Convert machine name to something we can put in CSS. Defaults are:

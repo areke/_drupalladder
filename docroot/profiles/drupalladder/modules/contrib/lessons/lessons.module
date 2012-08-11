@@ -14,7 +14,7 @@ function lessons_modules_enabled($modules) {
       $nid = $row->nid;
       $node = node_load($nid);
       if ( !$node->field_lesson_draft_status ) {
-        $node->field_lesson_draft_status['und'][0]['value'] = 'Draft status not available';
+        $node->field_lesson_draft_status['und'][0]['value'] = 'not-available';
         node_save($node);
       }
     }
