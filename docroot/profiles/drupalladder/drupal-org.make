@@ -23,7 +23,7 @@ projects[diff][subdir] = contrib
 projects[entity][version] = 1.0-rc1
 projects[entity][subdir] = contrib
 
-projects[entityreference][version] = 1.0-rc1
+projects[entityreference][version] = 1.0-rc3
 projects[entityreference][subdir] = contrib
 
 projects[examples][version] = 1.x-dev
@@ -89,7 +89,7 @@ projects[strongarm][subdir] = contrib
 projects[token][version] = 1.0-rc1
 projects[token][subdir] = contrib
 
-projects[nodeaccess_userreference][version] = 3.6
+projects[nodeaccess_userreference][version] = 3.8
 projects[nodeaccess_userreference][subdir] = contrib
 
 projects[uuid][type] = module
