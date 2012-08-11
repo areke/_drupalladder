@@ -73,6 +73,13 @@ function lessons_draft_status_preprocess_node(&$vars) {
       $lesson_draft_status = 'not-available';  
     }
 
+    // Value is set to 'Draft status not available' by lessons_modules_enabled() for
+    // lessons without a status. This has no human readable value
+    // since it's not a user-selectale option. Set value here.
+    if ($lesson_draft_status == 'Draft status not available') { 
+      $lesson_draft_status = 'not-available';
+    }
+
     // Convert machine name to something we can put in CSS. Defaults are:
     // draft, ready-for-review, needs-revision, up-to-date.
     $lesson_draft_status = _lessons_draft_status_machine_name($lesson_draft_status);
