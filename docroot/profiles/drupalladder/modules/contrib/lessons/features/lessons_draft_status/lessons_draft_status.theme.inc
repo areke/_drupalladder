@@ -57,9 +57,6 @@ function lessons_draft_status_preprocess_field(&$variables) {
     $variables['last_peer_review_timestamp'] = $last_peer_review_timestamp;
     $variables['last_peer_review'] = $last_peer_review;
     $variables['lesson_draft_status'] = $last_peer_review;
-
-dsm($variables ,'variables');
-
   }
 }
 
