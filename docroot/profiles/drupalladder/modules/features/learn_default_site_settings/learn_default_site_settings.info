@@ -8,11 +8,3 @@ dependencies[] = "ctools"
 dependencies[] = "strongarm"
 features[ctools][] = "strongarm:strongarm:1"
 features[variable][] = "site_frontpage"
-
-
-; Information added by drush on 2012-08-11
-version = "7.x-1.0-alpha8+12-dev"
-core = "7.x"
-project = "drupalladder"
-datestamp = "1344702185"
-

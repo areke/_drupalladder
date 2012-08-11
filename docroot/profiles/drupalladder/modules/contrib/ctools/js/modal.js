@@ -200,7 +200,7 @@
         });
         */
 
-      $('area.ctools-use-modal:not(.ctools-use-modal-processed), a.ctools-use-modal:not(.ctools-use-modal-processed)', context)
+      $('a.ctools-use-modal:not(.ctools-use-modal-processed)', context)
         .addClass('ctools-use-modal-processed')
         .click(Drupal.CTools.Modal.clickAjaxLink)
         .each(function () {

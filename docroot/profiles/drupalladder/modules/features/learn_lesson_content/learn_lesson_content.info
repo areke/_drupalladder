@@ -23,11 +23,3 @@ features[node_export_features][] = "de7dca9e-7b05-a934-4558-818813bd0619"
 features[node_export_features][] = "e0a5e06e-d0f0-d364-d9ef-7193e5393410"
 features[node_export_features][] = "ee503327-50be-1904-8d04-9499098cad64"
 features[node_export_features][] = "f6499034-7520-2db4-6522-c32c8429e2d7"
-
-
-; Information added by drush on 2012-08-11
-version = "7.x-1.0-alpha8+12-dev"
-core = "7.x"
-project = "drupalladder"
-datestamp = "1344702185"
-

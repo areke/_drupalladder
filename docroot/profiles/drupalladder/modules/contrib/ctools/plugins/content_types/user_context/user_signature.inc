@@ -15,7 +15,7 @@ $plugin = array(
 function ctools_user_signature_content_type_render($subtype, $conf, $panel_args, $context) {
   $account = isset($context->data) ? clone($context->data) : NULL;
   $block = new stdClass();
-  $block->module = 'user-signature';
+  $block->module = 'term-list';
 
   if ($account === FALSE || ($account->access == 0 && !user_access('administer users'))) {
     return;
@@ -23,7 +23,7 @@ function ctools_user_signature_content_type_render($subtype, $conf, $panel_args,
 
   $element['user_signature'] = array(
     '#theme' => 'user_signature',
-    '#signature' => check_markup($account->signature, $account->signature_format),
+    '#signature' => $account->signature,
   );
 
   $block->content = $element;

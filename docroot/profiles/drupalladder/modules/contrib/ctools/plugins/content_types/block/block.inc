@@ -435,9 +435,7 @@ function ctools_user_login_pane_render($subtype, $conf, $panel_args, $contexts) 
     return;
   }
 
-  $info = new stdClass;
-  $info->module = $module;
-  $info->delta = $delta;
+  $info = _ctools_get_block_info($module, $delta);
 
   $block = new stdClass;
   $block->subject = t('User login');

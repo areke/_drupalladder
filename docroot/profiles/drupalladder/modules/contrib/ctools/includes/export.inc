@@ -1033,7 +1033,7 @@ function ctools_export_get_schema($table) {
  * Gets the schemas for all tables with ctools object metadata.
  */
 function ctools_export_get_schemas($for_export = FALSE) {
-  $export_tables = &drupal_static(__FUNCTION__);
+  static $export_tables;
   if (is_null($export_tables)) {
     $export_tables = array();
     $schemas = drupal_get_schema();

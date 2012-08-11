@@ -59,9 +59,8 @@ function ctools_ajax_text_button($text, $dest, $alt, $class = '', $type = 'use-a
  * @param $value
  *  The value of the data.
  */
-function ctools_ajax_command_attr($selector, $name, $value) {
-  ctools_add_js('ajax-responder');
-  return array(
+ function ctools_ajax_command_attr($selector, $name, $value) {
+   return array(
      'command' => 'attr',
      'selector' => $selector,
      'name' => $name,
@@ -81,7 +80,6 @@ function ctools_ajax_command_attr($selector, $name, $value) {
  *   An array of options to pass to the url() function.
  */
 function ctools_ajax_command_redirect($url, $delay = 0, $options = array()) {
-  ctools_add_js('ajax-responder');
   return array(
     'command' => 'redirect',
     'url' => url($url, $options),
@@ -93,7 +91,6 @@ function ctools_ajax_command_redirect($url, $delay = 0, $options = array()) {
  * Force a reload of the current page.
  */
 function ctools_ajax_command_reload() {
-  ctools_add_js('ajax-responder');
   return array(
     'command' => 'reload',
   );
@@ -110,7 +107,6 @@ function ctools_ajax_command_reload() {
  *   selector jquery uses in $().
  */
 function ctools_ajax_command_submit($selector) {
-  ctools_add_js('ajax-responder');
   return array(
     'command' => 'submit',
     'selector' => $selector,
