@@ -48,9 +48,9 @@ function lessons_draft_status_preprocess_field(&$variables) {
     $lesson_draft_status = check_plain(_lessons_draft_status_machine_name($element['#items'][0]['value']));
 
     // Check for not-availables. Set human readable values.
-    if ($variables['element']['#items'][0]['value'] == 'not-available') {
-      $variables['element']['#items'][0]['value'] = t('Draft status not available');
-      $variables['element']['#markup'][0] = t('Draft status not available');
+    if ($variables['element']['#field_name'] == 'field_lesson_draft_status' 
+    && $variables['items'][0]['#markup'] == 'not-available') {
+      $variables['items'][0]['#markup'] = t('Draft status not available');
     }
 
     // Set variables to be surfaced in template file.
