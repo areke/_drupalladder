@@ -7,8 +7,10 @@ export ENV=dev
        drush @bryanhirsch.$ENV en dlm -y  # [ ] 
        drush @bryanhirsch.$ENV updb       # [ ] 
        drush @bryanhirsch.$ENV cc all     # [ ] 
+       drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"
 
-       drush @bryanhirsch.$ENV uli        # [ ]
+export ENV=dev; drush @bryanhirsch.$ENV updb  -y; drush @bryanhirsch.$ENV en dlm -y; drush @bryanhirsch.$ENV cc all -y; drush @bryanhirsch.$ENV uli  -y ; drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"
+
        [ ] Rebuild perms
        [ ] Revert features
        [ ] 
