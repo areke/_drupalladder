@@ -34,6 +34,7 @@ dsm($element,'element');
   && $element['#entity_type'] == 'node'
   && in_array('#object', array_keys($element))
   && $element['#object']->type == 'lesson') {
+
     // Get info about last peer review.
     $node = $element['#object'];
     if (!empty($node->field_lesson_last_peer_review['und'][0]['value'])) {
@@ -44,9 +45,17 @@ dsm($element,'element');
       $last_peer_review_timestamp = 0;
       $last_peer_review = t('AWAITING PEER REVIEW');
     }
+
     // Get CSS class.
     $lesson_draft_status = check_plain(_lessons_draft_status_machine_name($element['#items'][0]['value']));
 
+    // Check for not-availables. Set human readable values.
+    if ($variables['element']['#items'][0]['value'] == 'not-available') {
+      $variables['element']['#items'][0]['value'] = t('Draft status not available');
+      $variables['element']['#markup'][0] = t('Draft status not available');
+    }
+
+    // Set variables to be surfaced in template file.
     $variables['last_peer_review_timestamp'] = $last_peer_review_timestamp;
     $variables['last_peer_review'] = $last_peer_review;
     $variables['lesson_draft_status'] = $last_peer_review;
