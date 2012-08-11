@@ -11,10 +11,3 @@ features[ctools][] = views:views_default:3.0
 features[features_api][] = api:1
 features[views_view][] = lessons_list_curriculums
 features[views_view][] = lessons_lists_lessons
-
-; Information added by drupal.org packaging script on 2012-08-08
-version = "7.x-1.0-alpha6"
-core = "7.x"
-project = "lessons"
-datestamp = "1344464239"
-
