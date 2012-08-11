@@ -33,8 +33,8 @@ function main($argv) {
     sprintf('cd %s; ln -s ../sites/ sites; cd %s;', $docroot, $path), // Set up simlink to /sites.
     sprintf('ls -l %s/sites', $docroot), // Make sure the simlink is set up correctly.
     'git checkout docroot/.ah_site_archive_imported',
+    "git status | grep -v '.info'",
     'git add . ',
-    'git status ',
     '# Resolve any conflicts before committing.',
     sprintf('git commit -m "Update %s to version %s-%s"', $profile_name, $drupal_version, $version),
     sprintf('git tag -a %s-%s -m "Update %s to version %s-%s"', $drupal_version, $version, $profile_name, $drupal_version, $version),
