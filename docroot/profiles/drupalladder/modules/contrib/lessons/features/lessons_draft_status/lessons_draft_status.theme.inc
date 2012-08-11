@@ -28,8 +28,6 @@ function lessons_draft_status_theme($existing, $type, $theme, $path) {
 function lessons_draft_status_preprocess_field(&$variables) {
   $element = $variables['element'];
   
-dsm($element,'element');
-
   if ($element['#field_name'] == 'field_lesson_draft_status'
   && $element['#entity_type'] == 'node'
   && in_array('#object', array_keys($element))
@@ -59,6 +57,9 @@ dsm($element,'element');
     $variables['last_peer_review_timestamp'] = $last_peer_review_timestamp;
     $variables['last_peer_review'] = $last_peer_review;
     $variables['lesson_draft_status'] = $last_peer_review;
+
+dsm($variables ,'variables');
+
   }
 }
 
