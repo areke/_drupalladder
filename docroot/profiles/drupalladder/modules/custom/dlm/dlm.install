@@ -4,11 +4,32 @@
  */
 
 /**
- * Implements hook_update_N().
- * 
- * Update 7000: Enable lessons_draft_status and lesson_maintainers module.
+ * Implements hook_install().
  */
-function dlm_update_7000(&$sandbox) {
-  $module_list = array('lessons_draft_status', 'lesson_maintainers');
+function dlm_install() {
+  /**
+   * To support alpha development, check for "core" distro modules 
+   * in the info file that aren't enabled. Then enable them.
+   * After this module is enabled, future distro maintenance like
+   * this is managed by dlm_update_N().
+   */
+  $path = drupal_get_path('profile', 'drupalladder');
+  $info_file = $path . '/drupalladder.info';
+  $info = drupal_parse_info_file($info_file);
+  $core_modules = $info['dependencies'];
+  $module_list = array();
+  foreach ($core_modules as $module) {
+    if (!module_exists($module)) {
+      $module_list[] = $module;
+    }
+  }
   module_enable($module_list);
 }
+
+/**
+ * Implements hook_update_N().
+ */
+/*
+function dlm_update_7000(&$sandbox) {
+}
+// */
