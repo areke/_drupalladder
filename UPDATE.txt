@@ -18,3 +18,4 @@ Update 7.12-1.0-alpha3 to 7.x-1.0-alpha13
 
     [ ] Rebuild perms
     [ ] Revert features
+    [ ] Update draft status field / field group manually?
