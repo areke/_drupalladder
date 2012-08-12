@@ -57,6 +57,7 @@ function lessons_draft_status_preprocess_field(&$variables) {
     $variables['last_peer_review_timestamp'] = $last_peer_review_timestamp;
     $variables['last_peer_review'] = $last_peer_review;
     $variables['lesson_draft_status'] = $last_peer_review;
+
   }
 }
 
@@ -85,12 +86,11 @@ function lessons_draft_status_preprocess_node(&$vars) {
     // Convert machine name to something we can put in CSS. Defaults are:
     // draft, ready-for-review, needs-revision, up-to-date.
     $lesson_draft_status = _lessons_draft_status_machine_name($lesson_draft_status);
-
-     
     $lesson_draft_status = 'lesson-draft-status-' . $lesson_draft_status;
 
-  $vars['lesson_draft_status'] = $lesson_draft_status;
-  $vars['classes_array'][] = $lesson_draft_status;
+    // Set variables to be surfaced in template file.
+    $vars['lesson_draft_status'] = $lesson_draft_status;
+    $vars['classes_array'][] = $lesson_draft_status;
   }
 }
 
