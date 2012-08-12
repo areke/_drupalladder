@@ -67,7 +67,7 @@ function lessons_maintainers_field_default_fields() {
             'link' => FALSE,
           ),
           'type' => 'entityreference_label',
-          'weight' => 7,
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'above',

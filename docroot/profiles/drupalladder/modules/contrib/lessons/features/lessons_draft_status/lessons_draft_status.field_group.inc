@@ -20,7 +20,7 @@ function lessons_draft_status_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = '';
   $field_group->data = array(
-    'label' => 'Draft Status',
+    'label' => 'Draft status',
     'weight' => '2',
     'children' => array(
       0 => 'field_lesson_draft_status',
@@ -28,7 +28,7 @@ function lessons_draft_status_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Draft Status',
+      'label' => 'Draft status',
       'instance_settings' => array(
         'required_fields' => 1,
         'classes' => '',
