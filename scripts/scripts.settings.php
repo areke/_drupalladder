@@ -45,7 +45,7 @@ function _scripts_conf($argv) {
   $conf->path = dirname(dirname(__FILE__));
   $conf->docroot = $conf->path . '/docroot';
   $conf->profile = $conf->path . '/docroot/profiles/' . $conf->my_profile;
-  $conf->build_make = sprintf('%s/build/build-%s-%s-%s.make', $conf->path, $conf->my_profile, $conf->drupal_version, $conf->version);
+  $conf->build_make = sprintf('%s/make/%s-%s/build-%s.make', $conf->path, $conf->drupal_version, $conf->version, $conf->my_profile);
 
   return $conf;
 }
