@@ -1,17 +1,20 @@
+UPDATE.txt
+----------
 
-Update 7.12-1.0-alpha3 to ___________
+Update 7.12-1.0-alpha3 to 7.x-1.0-alpha13
 
-export ENV=dev
-       
-       drush @bryanhirsch.$ENV cc all     # [ ] 
-       drush @bryanhirsch.$ENV en dlm -y  # [ ] 
-       drush @bryanhirsch.$ENV updb       # [ ] 
-       drush @bryanhirsch.$ENV cc all     # [ ] 
-       drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"
+  export ENV=dev                       #     1
+         
+    drush @bryanhirsch.$ENV cc all     # [ ] 2
+    drush @bryanhirsch.$ENV updb       # [ ] 3
+    drush @bryanhirsch.$ENV en dlm -y  # [ ] 4
+    drush @bryanhirsch.$ENV cc all     # [ ] 5
+    drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"    # [ ] 6
 
-export ENV=dev; drush @bryanhirsch.$ENV updb  -y; drush @bryanhirsch.$ENV en dlm -y; drush @bryanhirsch.$ENV cc all -y; drush @bryanhirsch.$ENV uli  -y ; drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"
+  # 2 - 5
+  drush @bryanhirsch.$ENV cc all -y; drush @bryanhirsch.$ENV updb -y; drush @bryanhirsch.$ENV en dlm -y; drush @bryanhirsch.$ENV cc all -y ;
+  # 6
+  drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"
 
-       [ ] Rebuild perms
-       [ ] Revert features
-       [ ] 
-
+    [ ] Rebuild perms
+    [ ] Revert features
