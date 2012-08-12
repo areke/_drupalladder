@@ -7,11 +7,11 @@ main($argv);
 function main($argv) {
   $conf = _scripts_conf($argv);
 
-  $module_path = $conf->profile . '/modules/contrib/lessons';
+  $module_path = $conf->profile . '/modules/contrib/ladder';
   $commands = array(
-    'git clone --recursive --branch 7.x-1.x bhirsch@git.drupal.org:project/lessons.git',
-    "mv lessons/.git $module_path",
-    'rm -rf lessons',
+    'git clone --recursive --branch 7.x-1.x bhirsch@git.drupal.org:project/ladder.git',
+    "mv ladder/.git $module_path",
+    'rm -rf ladder',
     sprintf('rm %s/.gitignore', $module_path),
     sprintf("cd %s; %s;\n", $module_path, 'git reset --hard'),
   );
