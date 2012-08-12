@@ -44,10 +44,10 @@ projects[flag][subdir] = contrib
 projects[job_scheduler][version] = 2.0-alpha2
 projects[job_scheduler][subdir] = contrib
 
-projects[ladder][version] = 1.0-alpha2
+projects[ladder][version] = 1.0-alpha3
 projects[ladder][subdir] = contrib
 
-projects[lessons][version] = 1.0-alpha6
+projects[lessons][version] = 1.0-alpha8
 projects[lessons][subdir] = contrib
 
 projects[mollom][version] = 2.0
