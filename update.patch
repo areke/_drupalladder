@@ -1,0 +1,592 @@
+diff --git a/UPDATE.txt b/UPDATE.txt
+new file mode 100644
+index 0000000..acf4410
+--- /dev/null
++++ b/UPDATE.txt
+@@ -0,0 +1,21 @@
++UPDATE.txt
++----------
++
++Update 7.12-1.0-alpha3 to 7.x-1.0-alpha13
++
++  export ENV=dev                       #     1
++         
++    drush @bryanhirsch.$ENV cc all     # [ ] 2
++    drush @bryanhirsch.$ENV updb       # [ ] 3
++    drush @bryanhirsch.$ENV en dlm -y  # [ ] 4
++    drush @bryanhirsch.$ENV cc all     # [ ] 5
++    drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"    # [ ] 6
++
++  # 2 - 5
++  drush @bryanhirsch.$ENV cc all -y; drush @bryanhirsch.$ENV updb -y; drush @bryanhirsch.$ENV en dlm -y; drush @bryanhirsch.$ENV cc all -y ;
++  # 6
++  drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"
++
++    [ ] Rebuild perms
++    [ ] Revert features
++    [ ] Update draft status field / field group manually?
+diff --git a/build/build-drupalladder-7.x-1.0-alpha8.make b/build/build-drupalladder-7.x-1.0-alpha8.make
+deleted file mode 100644
+index 1fe0e3c..0000000
+--- a/build/build-drupalladder-7.x-1.0-alpha8.make
++++ /dev/null
+@@ -1,4 +0,0 @@
+-api = 2
+-core = 7.x
+-projects[drupal][version] = 7.15
+-projects[drupalladder][version] = 1.0-alpha8
+diff --git a/build/build-drupalladder-7.x-1.0-alpha9.make b/build/build-drupalladder-7.x-1.0-alpha9.make
+deleted file mode 100644
+index 03511ea..0000000
+--- a/build/build-drupalladder-7.x-1.0-alpha9.make
++++ /dev/null
+@@ -1,4 +0,0 @@
+-api = 2
+-core = 7.x
+-projects[drupal][version] = 7.15
+-projects[drupalladder][version] = 1.0-alpha9
+diff --git a/make/7.x-1.0-alpha13/build-drupalladder.make b/make/7.x-1.0-alpha13/build-drupalladder.make
+new file mode 100644
+index 0000000..2e74d47
+--- /dev/null
++++ b/make/7.x-1.0-alpha13/build-drupalladder.make
+@@ -0,0 +1,4 @@
++api = 2
++core = 7.x
++projects[drupal][version] = 7.15
++projects[drupalladder][version] = 1.0-alpha12
+diff --git a/make/7.x-1.0-alpha13/drupal-org.make b/make/7.x-1.0-alpha13/drupal-org.make
+new file mode 100644
+index 0000000..1e47909
+--- /dev/null
++++ b/make/7.x-1.0-alpha13/drupal-org.make
+@@ -0,0 +1,106 @@
++; Learn Drupal
++; -------------
++
++; Core version
++; -------------
++core = 7.x
++
++; API version
++; -----------
++api = 2
++
++; Contrib projects
++; ----------------
++projects[ctools][version] = 1.0-rc2
++projects[ctools][subdir] = contrib
++
++projects[devel][version] = 1.2
++projects[devel][subdir] = contrib
++
++projects[diff][version] = 2.0
++projects[diff][subdir] = contrib
++
++projects[entity][version] = 1.0-rc1
++projects[entity][subdir] = contrib
++
++projects[entityreference][version] = 1.0-rc3
++projects[entityreference][subdir] = contrib
++
++projects[examples][version] = 1.x-dev
++projects[examples][subdir] = contrib
++
++projects[features][version] = 1.0-rc1
++projects[features][subdir] = contrib
++
++projects[feeds][version] = 2.0-alpha4
++projects[feeds][subdir] = contrib
++
++projects[field_group][version] = 1.1
++projects[field_group][subdir] = contrib
++
++projects[flag][version] = 2.0-beta6
++projects[flag][subdir] = contrib
++
++projects[job_scheduler][version] = 2.0-alpha2
++projects[job_scheduler][subdir] = contrib
++
++projects[ladder][version] = 1.0-alpha3
++projects[ladder][subdir] = contrib
++
++projects[lessons][version] = 1.0-alpha8
++projects[lessons][subdir] = contrib
++
++projects[mollom][version] = 2.0
++projects[mollom][subdir] = contrib
++
++projects[node_export][type] = module
++projects[node_export][download][type] = git
++; Node Export version 7.x-3.x-dev including commit:
++; http://drupal.org/commitlog/commit/6132/301c61096282cebfdfd23ee64aef7d194f3138e7
++; to fix "Undefined property user name error" http://drupal.org/node/1467976
++projects[node_export][download][branch] = 7.x-3.x
++projects[node_export][download][revision] = 301c61096282cebfdfd23ee64aef7d194f3138e7
++projects[node_export][subdir] = contrib
++
++projects[panels][version] = 3.2
++projects[panels][subdir] = contrib
++
++projects[pathauto][version] = 1.0
++projects[pathauto][subdir] = contrib
++
++projects[rules][type] = module
++projects[rules][download][type] = git
++; Rules version 7.x-2.x-dev including commit:
++; http://drupalcode.org/project/rules.git/commit/6050ca6
++; to remove rules.make file http://drupal.org/node/1329346
++projects[rules][download][branch] = 7.x-2.x
++projects[rules][download][revision] = 6050ca6ae22080879672fa698357f5ec41d4ff74
++projects[rules][subdir] = contrib
++
++; Not including Services module until http://drupal.org/node/1313976 lands
++;projects[services][version] = 3.1
++;projects[services][subdir] = contrib
++;; services patch: this just adds a third-party library to the rest server /lib directory so it's ready to go without doing this step manually
++;projects[services][patch][] = https://raw.github.com/gist/1973788/8e9f8cc095ed3cb4d243639196a51b30a97ce97d/services.spyc.patch
++
++projects[strongarm][version] = 2.0-beta5
++projects[strongarm][subdir] = contrib
++
++projects[token][version] = 1.0-rc1
++projects[token][subdir] = contrib
++
++projects[nodeaccess_userreference][version] = 3.8
++projects[nodeaccess_userreference][subdir] = contrib
++
++projects[uuid][type] = module
++projects[uuid][download][type] = git
++; UUID version 7.x-2.x-dev including commit:
++; http://drupalcode.org/project/uuid.git/commitdiff/c2bb83250451c96be843d11837a43f98d414c76f
++; (see http://drupal.org/node/1423542#comment-5555026 )
++; to avoid Undefined Index error. Should be unnecessary after 7.x-1.0-alpha3.
++projects[uuid][download][branch] = 7.x-1.x
++projects[uuid][download][revision] = c2bb83250451c96be843d11837a43f98d414c76f
++projects[uuid][subdir] = contrib
++
++projects[views][version] = 3.3
++projects[views][subdir] = contrib
+diff --git a/make/7.x-1.0-alpha14/build-drupalladder.make b/make/7.x-1.0-alpha14/build-drupalladder.make
+new file mode 100644
+index 0000000..15d84a0
+--- /dev/null
++++ b/make/7.x-1.0-alpha14/build-drupalladder.make
+@@ -0,0 +1,4 @@
++api = 2
++core = 7.x
++projects[drupal][version] = 7.15
++projects[drupalladder][version] = 1.0-alpha14
+diff --git a/make/7.x-1.0-alpha14/drupal-org.make b/make/7.x-1.0-alpha14/drupal-org.make
+new file mode 100644
+index 0000000..db5b2f5
+--- /dev/null
++++ b/make/7.x-1.0-alpha14/drupal-org.make
+@@ -0,0 +1,106 @@
++; Learn Drupal
++; -------------
++
++; Core version
++; -------------
++core = 7.x
++
++; API version
++; -----------
++api = 2
++
++; Contrib projects
++; ----------------
++projects[ctools][version] = 1.0-rc2
++projects[ctools][subdir] = contrib
++
++projects[devel][version] = 1.2
++projects[devel][subdir] = contrib
++
++projects[diff][version] = 2.0
++projects[diff][subdir] = contrib
++
++projects[entity][version] = 1.0-rc1
++projects[entity][subdir] = contrib
++
++projects[entityreference][version] = 1.0-rc3
++projects[entityreference][subdir] = contrib
++
++projects[examples][version] = 1.x-dev
++projects[examples][subdir] = contrib
++
++projects[features][version] = 1.0-rc1
++projects[features][subdir] = contrib
++
++projects[feeds][version] = 2.0-alpha4
++projects[feeds][subdir] = contrib
++
++projects[field_group][version] = 1.1
++projects[field_group][subdir] = contrib
++
++projects[flag][version] = 2.0-beta6
++projects[flag][subdir] = contrib
++
++projects[job_scheduler][version] = 2.0-alpha2
++projects[job_scheduler][subdir] = contrib
++
++projects[ladder][version] = 1.0-alpha3
++projects[ladder][subdir] = contrib
++
++projects[lessons][version] = 1.0-alpha9
++projects[lessons][subdir] = contrib
++
++projects[mollom][version] = 2.0
++projects[mollom][subdir] = contrib
++
++projects[node_export][type] = module
++projects[node_export][download][type] = git
++; Node Export version 7.x-3.x-dev including commit:
++; http://drupal.org/commitlog/commit/6132/301c61096282cebfdfd23ee64aef7d194f3138e7
++; to fix "Undefined property user name error" http://drupal.org/node/1467976
++projects[node_export][download][branch] = 7.x-3.x
++projects[node_export][download][revision] = 301c61096282cebfdfd23ee64aef7d194f3138e7
++projects[node_export][subdir] = contrib
++
++projects[panels][version] = 3.2
++projects[panels][subdir] = contrib
++
++projects[pathauto][version] = 1.0
++projects[pathauto][subdir] = contrib
++
++projects[rules][type] = module
++projects[rules][download][type] = git
++; Rules version 7.x-2.x-dev including commit:
++; http://drupalcode.org/project/rules.git/commit/6050ca6
++; to remove rules.make file http://drupal.org/node/1329346
++projects[rules][download][branch] = 7.x-2.x
++projects[rules][download][revision] = 6050ca6ae22080879672fa698357f5ec41d4ff74
++projects[rules][subdir] = contrib
++
++; Not including Services module until http://drupal.org/node/1313976 lands
++;projects[services][version] = 3.1
++;projects[services][subdir] = contrib
++;; services patch: this just adds a third-party library to the rest server /lib directory so it's ready to go without doing this step manually
++;projects[services][patch][] = https://raw.github.com/gist/1973788/8e9f8cc095ed3cb4d243639196a51b30a97ce97d/services.spyc.patch
++
++projects[strongarm][version] = 2.0-beta5
++projects[strongarm][subdir] = contrib
++
++projects[token][version] = 1.0-rc1
++projects[token][subdir] = contrib
++
++projects[nodeaccess_userreference][version] = 3.8
++projects[nodeaccess_userreference][subdir] = contrib
++
++projects[uuid][type] = module
++projects[uuid][download][type] = git
++; UUID version 7.x-2.x-dev including commit:
++; http://drupalcode.org/project/uuid.git/commitdiff/c2bb83250451c96be843d11837a43f98d414c76f
++; (see http://drupal.org/node/1423542#comment-5555026 )
++; to avoid Undefined Index error. Should be unnecessary after 7.x-1.0-alpha3.
++projects[uuid][download][branch] = 7.x-1.x
++projects[uuid][download][revision] = c2bb83250451c96be843d11837a43f98d414c76f
++projects[uuid][subdir] = contrib
++
++projects[views][version] = 3.3
++projects[views][subdir] = contrib
+diff --git a/make/7.x-1.x-auto/build-drupalladder.make b/make/7.x-1.x-auto/build-drupalladder.make
+new file mode 100644
+index 0000000..4c9e6de
+--- /dev/null
++++ b/make/7.x-1.x-auto/build-drupalladder.make
+@@ -0,0 +1,12 @@
++api = 2
++core = 7.x
++
++; Drupal
++; -------
++projects[] = drupal
++
++; Drupal Ladder installation profile
++; -------------------------------
++projects[drupalladder][type] = profile
++projects[drupalladder][download][type] = git
++projects[drupalladder][download][branch] = 7.x-1.x
+diff --git a/make/7.x-1.x-auto/drupal-org.make b/make/7.x-1.x-auto/drupal-org.make
+new file mode 100644
+index 0000000..2e0c3eb
+--- /dev/null
++++ b/make/7.x-1.x-auto/drupal-org.make
+@@ -0,0 +1,63 @@
++; Learn Drupal
++; -------------
++
++; Core version
++; -------------
++core = 7.x
++
++; API version
++; -----------
++api = 2
++
++; Contrib projects
++; ----------------
++projects[ctools][subdir] = contrib
++
++projects[devel][subdir] = contrib
++
++projects[diff][subdir] = contrib
++
++projects[entity][subdir] = contrib
++
++projects[entityreference][subdir] = contrib
++
++projects[examples][subdir] = contrib
++
++projects[features][subdir] = contrib
++
++projects[feeds][subdir] = contrib
++
++projects[field_group][subdir] = contrib
++
++projects[flag][subdir] = contrib
++
++projects[job_scheduler][subdir] = contrib
++
++projects[ladder][subdir] = contrib
++
++projects[lessons][subdir] = contrib
++
++projects[mollom][subdir] = contrib
++
++projects[node_export][subdir] = contrib
++
++projects[panels][subdir] = contrib
++
++projects[pathauto][subdir] = contrib
++
++projects[rules][subdir] = contrib
++
++; Not including Services module until http://drupal.org/node/1313976 lands
++;projects[services][subdir] = contrib
++;; services patch: this just adds a third-party library to the rest server /lib directory so it's ready to go without doing this step manually
++;projects[services][patch][] = https://raw.github.com/gist/1973788/8e9f8cc095ed3cb4d243639196a51b30a97ce97d/services.spyc.patch
++
++projects[strongarm][subdir] = contrib
++
++projects[token][subdir] = contrib
++
++projects[nodeaccess_userreference][subdir] = contrib
++
++projects[uuid][subdir] = contrib
++
++projects[views][subdir] = contrib
+diff --git a/make/7.x-1.x/build-drupalladder.make b/make/7.x-1.x/build-drupalladder.make
+new file mode 100644
+index 0000000..4c9e6de
+--- /dev/null
++++ b/make/7.x-1.x/build-drupalladder.make
+@@ -0,0 +1,12 @@
++api = 2
++core = 7.x
++
++; Drupal
++; -------
++projects[] = drupal
++
++; Drupal Ladder installation profile
++; -------------------------------
++projects[drupalladder][type] = profile
++projects[drupalladder][download][type] = git
++projects[drupalladder][download][branch] = 7.x-1.x
+diff --git a/make/7.x-1.x/drupal-org.make b/make/7.x-1.x/drupal-org.make
+new file mode 100644
+index 0000000..db5b2f5
+--- /dev/null
++++ b/make/7.x-1.x/drupal-org.make
+@@ -0,0 +1,106 @@
++; Learn Drupal
++; -------------
++
++; Core version
++; -------------
++core = 7.x
++
++; API version
++; -----------
++api = 2
++
++; Contrib projects
++; ----------------
++projects[ctools][version] = 1.0-rc2
++projects[ctools][subdir] = contrib
++
++projects[devel][version] = 1.2
++projects[devel][subdir] = contrib
++
++projects[diff][version] = 2.0
++projects[diff][subdir] = contrib
++
++projects[entity][version] = 1.0-rc1
++projects[entity][subdir] = contrib
++
++projects[entityreference][version] = 1.0-rc3
++projects[entityreference][subdir] = contrib
++
++projects[examples][version] = 1.x-dev
++projects[examples][subdir] = contrib
++
++projects[features][version] = 1.0-rc1
++projects[features][subdir] = contrib
++
++projects[feeds][version] = 2.0-alpha4
++projects[feeds][subdir] = contrib
++
++projects[field_group][version] = 1.1
++projects[field_group][subdir] = contrib
++
++projects[flag][version] = 2.0-beta6
++projects[flag][subdir] = contrib
++
++projects[job_scheduler][version] = 2.0-alpha2
++projects[job_scheduler][subdir] = contrib
++
++projects[ladder][version] = 1.0-alpha3
++projects[ladder][subdir] = contrib
++
++projects[lessons][version] = 1.0-alpha9
++projects[lessons][subdir] = contrib
++
++projects[mollom][version] = 2.0
++projects[mollom][subdir] = contrib
++
++projects[node_export][type] = module
++projects[node_export][download][type] = git
++; Node Export version 7.x-3.x-dev including commit:
++; http://drupal.org/commitlog/commit/6132/301c61096282cebfdfd23ee64aef7d194f3138e7
++; to fix "Undefined property user name error" http://drupal.org/node/1467976
++projects[node_export][download][branch] = 7.x-3.x
++projects[node_export][download][revision] = 301c61096282cebfdfd23ee64aef7d194f3138e7
++projects[node_export][subdir] = contrib
++
++projects[panels][version] = 3.2
++projects[panels][subdir] = contrib
++
++projects[pathauto][version] = 1.0
++projects[pathauto][subdir] = contrib
++
++projects[rules][type] = module
++projects[rules][download][type] = git
++; Rules version 7.x-2.x-dev including commit:
++; http://drupalcode.org/project/rules.git/commit/6050ca6
++; to remove rules.make file http://drupal.org/node/1329346
++projects[rules][download][branch] = 7.x-2.x
++projects[rules][download][revision] = 6050ca6ae22080879672fa698357f5ec41d4ff74
++projects[rules][subdir] = contrib
++
++; Not including Services module until http://drupal.org/node/1313976 lands
++;projects[services][version] = 3.1
++;projects[services][subdir] = contrib
++;; services patch: this just adds a third-party library to the rest server /lib directory so it's ready to go without doing this step manually
++;projects[services][patch][] = https://raw.github.com/gist/1973788/8e9f8cc095ed3cb4d243639196a51b30a97ce97d/services.spyc.patch
++
++projects[strongarm][version] = 2.0-beta5
++projects[strongarm][subdir] = contrib
++
++projects[token][version] = 1.0-rc1
++projects[token][subdir] = contrib
++
++projects[nodeaccess_userreference][version] = 3.8
++projects[nodeaccess_userreference][subdir] = contrib
++
++projects[uuid][type] = module
++projects[uuid][download][type] = git
++; UUID version 7.x-2.x-dev including commit:
++; http://drupalcode.org/project/uuid.git/commitdiff/c2bb83250451c96be843d11837a43f98d414c76f
++; (see http://drupal.org/node/1423542#comment-5555026 )
++; to avoid Undefined Index error. Should be unnecessary after 7.x-1.0-alpha3.
++projects[uuid][download][branch] = 7.x-1.x
++projects[uuid][download][revision] = c2bb83250451c96be843d11837a43f98d414c76f
++projects[uuid][subdir] = contrib
++
++projects[views][version] = 3.3
++projects[views][subdir] = contrib
+diff --git a/scripts/build b/scripts/build
+index 755f147..9d72ef4 100755
+--- a/scripts/build
++++ b/scripts/build
+@@ -33,8 +33,8 @@ function main($argv) {
+     sprintf('cd %s; ln -s ../sites/ sites; cd %s;', $docroot, $path), // Set up simlink to /sites.
+     sprintf('ls -l %s/sites', $docroot), // Make sure the simlink is set up correctly.
+     'git checkout docroot/.ah_site_archive_imported',
++    "git status | grep -v '.info'",
+     'git add . ',
+-    'git status ',
+     '# Resolve any conflicts before committing.',
+     sprintf('git commit -m "Update %s to version %s-%s"', $profile_name, $drupal_version, $version),
+     sprintf('git tag -a %s-%s -m "Update %s to version %s-%s"', $drupal_version, $version, $profile_name, $drupal_version, $version),
+diff --git a/scripts/ladder-dev b/scripts/ladder-dev
+new file mode 100755
+index 0000000..d16c91c
+--- /dev/null
++++ b/scripts/ladder-dev
+@@ -0,0 +1,35 @@
++#!/usr/bin/php
++<?php
++
++require_once('scripts.settings.php');
++main($argv);
++
++function main($argv) {
++  $conf = _scripts_conf($argv);
++
++  $module_path = $conf->profile . '/modules/contrib/ladder';
++  $commands = array(
++    'git clone --recursive --branch 7.x-1.x bhirsch@git.drupal.org:project/ladder.git',
++    "mv ladder/.git $module_path",
++    'rm -rf ladder',
++    sprintf('rm %s/.gitignore', $module_path),
++    sprintf("cd %s; %s;\n", $module_path, 'git reset --hard'),
++  );
++  foreach($commands as $command) {
++    execute_command($command);
++  }
++}
++
++/**
++ * Execute command and print results.
++ * 
++ * @param $command
++ *  String. Command to be run from the command line.
++ */
++function execute_command($command) {
++  echo "\nRunning:\n\t$command\n";
++  shell_exec($command);
++  // $result = exec($command, $output);
++  // printf("result: %s\n\n", print_r($result));
++  // printf("output: %s\n\n", print_r($output));
++}
+diff --git a/scripts/lessons-dev b/scripts/lessons-dev
+index 110af24..ed4a4c8 100755
+--- a/scripts/lessons-dev
++++ b/scripts/lessons-dev
+@@ -1,15 +1,19 @@
+ #!/usr/bin/php
+ <?php
+ 
+-main();
++require_once('scripts.settings.php');
++main($argv);
+ 
+-function main() {
+-  $path = '../docroot/profiles/drupalladder/modules/contrib/lessons/';
++function main($argv) {
++  $conf = _scripts_conf($argv);
++
++  $module_path = $conf->profile . '/modules/contrib/lessons';
+   $commands = array(
+     'git clone --recursive --branch 7.x-1.x bhirsch@git.drupal.org:project/lessons.git',
+-    "mv lessons/.git $path",
++    "mv lessons/.git $module_path",
+     'rm -rf lessons',
+-    sprintf("cd %s; %s;\n", $path, 'git reset --hard'),
++    sprintf('rm %s/.gitignore', $module_path),
++    sprintf("cd %s; %s;\n", $module_path, 'git reset --hard'),
+   );
+   foreach($commands as $command) {
+     execute_command($command);
