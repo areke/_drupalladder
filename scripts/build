@@ -22,6 +22,7 @@ function main($argv) {
   $docroot = $conf->docroot;
   $profile = $conf->profile;
   $build_make = $conf->build_make;
+  $branch = $conf->branch;
 
   printf("\n\nRebuild %s %s-%s...\n\n", $profile_name, $drupal_version, $version);
 
@@ -35,6 +36,8 @@ function main($argv) {
     'git checkout docroot/.ah_site_archive_imported',
     "git status | grep -v '.info'",
     'git add . ',
+    "git status | grep -v '.info'",
+    sprintf('git diff %s --stat | grep -v ".info"  # If this is a fresh build of something staged in the %s branch, do this.', $branch, $branch),
     '# Resolve any conflicts before committing.',
     sprintf('git commit -m "Update %s to version %s-%s"', $profile_name, $drupal_version, $version),
     sprintf('git tag -a %s-%s -m "Update %s to version %s-%s"', $drupal_version, $version, $profile_name, $drupal_version, $version),
