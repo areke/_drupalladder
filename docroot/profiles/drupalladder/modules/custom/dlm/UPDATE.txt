@@ -1,0 +1,6 @@
+UPDATE.txt
+----------
+
+7.x-1.0-alpha9
+
+  Enable Drupal Ladder Maintenance (dlm) module.

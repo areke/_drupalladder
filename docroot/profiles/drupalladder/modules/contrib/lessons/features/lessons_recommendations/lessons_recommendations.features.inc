@@ -8,10 +8,7 @@
  * Implements hook_views_api().
  */
 function lessons_recommendations_views_api() {
-  list($module, $api) = func_get_args();
-  if ($module == "views" && $api == "views_default") {
-    return array("version" => "3.0");
-  }
+  return array("version" => "3.0");
 }
 
 /**
@@ -28,12 +25,12 @@ function lessons_recommendations_flag_default_flags() {
       0 => 'lesson',
       1 => 'curriculum',
     ),
-    'flag_short' => 'Recommend this',
-    'flag_long' => 'If you find this useful, recommend it.',
-    'flag_message' => 'Thanks for liking this. Your recommendation will help other people find useful lessons. Consider posting a comment too!',
-    'unflag_short' => 'You recommend this (click to unrecommend)',
-    'unflag_long' => 'If you don\'t actually like this, "unrecommend" it here',
-    'unflag_message' => 'You no longer recommend this. Consider posting a comment with some feedback for the author.',
+    'flag_short' => 'Not recommended',
+    'flag_long' => 'Not recommended',
+    'flag_message' => '',
+    'unflag_short' => '',
+    'unflag_long' => 'Recommended',
+    'unflag_message' => 'Recommended',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'roles' => array(

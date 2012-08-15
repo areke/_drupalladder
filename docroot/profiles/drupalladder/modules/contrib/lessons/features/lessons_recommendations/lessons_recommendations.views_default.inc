@@ -64,12 +64,13 @@ function lessons_recommendations_views_default_views() {
   $handler->display->display_options['style_options']['sticky'] = 1;
   $handler->display->display_options['style_options']['order'] = 'desc';
   /* No results behavior: Global: Text area */
-  $handler->display->display_options['empty']['text']['id'] = 'area';
+  $handler->display->display_options['empty']['text']['id'] = 'text';
   $handler->display->display_options['empty']['text']['table'] = 'views';
   $handler->display->display_options['empty']['text']['field'] = 'area';
   $handler->display->display_options['empty']['text']['empty'] = FALSE;
-  $handler->display->display_options['empty']['text']['content'] = 'You have not yet bookmarked any content. Click the "Bookmark this" link when viewing a piece of content to add it to this list.';
+  $handler->display->display_options['empty']['text']['content'] = 'You have not recommended any content. Click the "Recommend this" link when viewing a piece of content to add it to this list.';
   $handler->display->display_options['empty']['text']['format'] = 'plain_text';
+  $handler->display->display_options['empty']['text']['tokenize'] = 0;
   /* Relationship: Flags: lessons_recommend */
   $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
   $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';

@@ -3,9 +3,9 @@ description = Links to tell people how to get involved and contribute to the pro
 core = 7.x
 package = Drupal Ladder
 
-; Information added by drupal.org packaging script on 2012-08-04
-version = "7.x-1.0-alpha8"
+; Information added by drupal.org packaging script on 2012-08-12
+version = "7.x-1.0-alpha14"
 core = "7.x"
 project = "drupalladder"
-datestamp = "1344095239"
+datestamp = "1344804739"
 
