@@ -5,9 +5,8 @@ package = "Node export"
 configure = admin/config/content/node_export
 files[]=views/views_handler_field_node_link_export.inc
 
-; Information added by drush on 2012-08-11
-version = "7.x-3.0-rc1+7-dev"
-core = "7.x"
+; Information added by drush on 2012-08-19
+version = ""
 project = "node_export"
-datestamp = "1344705186"
+datestamp = "1345416862"
 

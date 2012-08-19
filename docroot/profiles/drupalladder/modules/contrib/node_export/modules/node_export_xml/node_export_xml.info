@@ -4,9 +4,8 @@ dependencies[] = node_export
 core = 7.x
 package = "Node export"
 
-; Information added by drush on 2012-08-11
-version = "7.x-3.0-rc1+7-dev"
-core = "7.x"
+; Information added by drush on 2012-08-19
+version = ""
 project = "node_export"
-datestamp = "1344705186"
+datestamp = "1345416862"
 
