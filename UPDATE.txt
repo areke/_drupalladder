@@ -1,14 +1,14 @@
 UPDATE.txt
 ----------
 
-Update 7.12-1.0-alpha3 to 7.x-1.0-alpha13
+Update 7.12-1.0-alpha3 to 7.x-1.0-alpha14
 
   export ENV=dev                       #     1
          
-    drush @bryanhirsch.$ENV cc all     # [ ] 2
-    drush @bryanhirsch.$ENV updb       # [ ] 3
-    drush @bryanhirsch.$ENV en dlm -y  # [ ] 4
-    drush @bryanhirsch.$ENV cc all     # [ ] 5
+    drush @bryanhirsch.$ENV cc all     # [x] 2
+    drush @bryanhirsch.$ENV updb       # [x] 3
+    drush @bryanhirsch.$ENV en dlm -y  # [x] 4
+    drush @bryanhirsch.$ENV cc all     # [x] 5
     drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"    # [ ] 6
 
   # 2 - 5
@@ -16,6 +16,6 @@ Update 7.12-1.0-alpha3 to 7.x-1.0-alpha13
   # 6
   drush @bryanhirsch.$ENV eval "lessons_modules_enabled(array('lessons_draft_status'));"
 
-    [ ] Rebuild perms
-    [ ] Revert features
-    [ ] Update draft status field / field group manually?
+    [x] Rebuild perms
+    [x] Revert features
+    [x] Update draft status field / field groups manually
