@@ -80,8 +80,8 @@
     | MVP Feature                         | Issue #      | Maintainer       | Status         |
     +-------------------------------------+--------------+------------------+----------------+
     | Cannonical "recommended" lessons    | 1495642      |                  | in progress    |
-    | Content access/maintainership       | 1495664      | jeffschuler      | in progress    |
-    | Content workflow                    | 1524264      | dgoutam          | in progress    |
+    | Content access/maintainership       | 1495664      | jeffschuler      | complete       |
+    | Content workflow                    | 1524264      | dgoutam          | complete       |
     | Design                              |              |                  |                |
     | Ladder user experience              |              |                  |                |
     | Learn Drupal default lesson content | 1533548      | kay_v            | in progress    |

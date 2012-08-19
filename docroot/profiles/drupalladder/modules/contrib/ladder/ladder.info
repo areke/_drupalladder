@@ -7,9 +7,9 @@ dependencies[] = lessons_lesson
 dependencies[] = lessons_curriculum
 dependencies[] = lessons_completed
 
-; Information added by drupal.org packaging script on 2012-03-23
-version = "7.x-1.0-alpha2"
+; Information added by drupal.org packaging script on 2012-08-12
+version = "7.x-1.0-alpha3"
 core = "7.x"
 project = "ladder"
-datestamp = "1332546646"
+datestamp = "1344778642"
 

@@ -1,0 +1,11 @@
+name = Drupal Ladder Maintenance
+description = Update functions and misc helpful stuff for Drupal Ladder distro maintenance.
+core = 7.x
+package = Drupal Ladder
+
+; Information added by drupal.org packaging script on 2012-08-12
+version = "7.x-1.0-alpha14"
+core = "7.x"
+project = "drupalladder"
+datestamp = "1344804739"
+

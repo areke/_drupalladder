@@ -17,9 +17,9 @@ features[variable][] = "comment_page"
 features[variable][] = "node_options_page"
 features[variable][] = "node_submitted_page"
 
-; Information added by drupal.org packaging script on 2012-08-04
-version = "7.x-1.0-alpha8"
+; Information added by drupal.org packaging script on 2012-08-12
+version = "7.x-1.0-alpha14"
 core = "7.x"
 project = "drupalladder"
-datestamp = "1344095239"
+datestamp = "1344804739"
 

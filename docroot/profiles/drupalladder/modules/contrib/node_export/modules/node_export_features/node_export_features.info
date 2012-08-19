@@ -6,9 +6,8 @@ dependencies[] = features
 core = 7.x
 package = "Node export"
 
-; Information added by drush on 2012-08-08
-version = "7.x-3.0-rc1+7-dev"
-core = "7.x"
+; Information added by drush on 2012-08-15
+version = ""
 project = "node_export"
-datestamp = "1344458180"
+datestamp = "1345028091"
 

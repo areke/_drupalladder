@@ -11,9 +11,9 @@ features[ctools][] = "strongarm:strongarm:1"
 features[variable][] = "pathauto_node_curriculum_pattern"
 features[variable][] = "pathauto_node_lesson_pattern"
 
-; Information added by drupal.org packaging script on 2012-04-14
-version = "7.x-1.0-alpha2"
+; Information added by drupal.org packaging script on 2012-08-12
+version = "7.x-1.0-alpha9"
 core = "7.x"
 project = "lessons"
-datestamp = "1334429198"
+datestamp = "1344804761"
 

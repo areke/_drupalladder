@@ -20,13 +20,21 @@ function nodeaccess_userreference_node_grants($account, $op) {
  * Implements hook_form-FORM-ID_alter().
  */
 function nodeaccess_userreference_form_field_ui_field_edit_form_alter(&$form, $form_state) {
-  if ($form['#field']['type'] == 'user_reference' && $form['#instance']['entity_type'] == 'node') {
+  if (
+    (
+      ($form['#field']['type'] == 'entityreference' && $form['#field']['settings']['target_type'] == 'user')
+      ||
+      $form['#field']['type'] == 'user_reference'
+    )
+    &&
+    $form['#instance']['entity_type'] == 'node'
+  ) {
     $data = nodeaccess_userreference_field_settings($form['#instance']['bundle'], $form['#field']['field_name']);
-    $form['field']['settings']['nodeaccess_userreference'] = array(
+    $form['instance']['settings']['nodeaccess_userreference'] = array(
       '#type' => 'fieldset',
       '#title' => t('Node access user reference'),
     );
-    $form['field']['settings']['nodeaccess_userreference']['referenced'] = array(
+    $form['instance']['settings']['nodeaccess_userreference']['referenced'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Grants for referenced users on the node'),
       '#default_value' => isset($data['referenced']) ? $data['referenced'] : array(),
@@ -40,14 +48,24 @@ function nodeaccess_userreference_form_field_ui_field_edit_form_alter(&$form, $f
       ),
       '#description' => t('These content access permissions will be granted to users referenced in the field.  These permissions apply to the node on which the field values are set.  Do not check the <em>deny</em> options unless you want to forcibly deny access to referenced users.'),
     );
-    $form['field']['settings']['nodeaccess_userreference']['create'] = array(
+    $form['instance']['settings']['nodeaccess_userreference']['referenced_published'] = array(
+      '#type' => 'select',
+      '#title' => t('Unpublished nodes'),
+      '#title_display' => 'none',
+      '#default_value' => isset($data['referenced_published']) ? $data['referenced_published'] : 0,
+      '#options' => array(
+        0 => t('Give these grants for published nodes only'),
+        1 => t('Give these grants for published and unpublished nodes'),
+      ),
+    );
+    $form['instance']['settings']['nodeaccess_userreference']['create'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Grants for referenced users to create content'),
       '#default_value' => isset($data['create']) ? $data['create'] : array(),
       '#options' => node_type_get_names(),
       '#description' => t('These content access permissions will be granted to users referenced in the field.  These permissions apply to the content types selected.'),
     );
-    $form['field']['settings']['nodeaccess_userreference']['author'] = array(
+    $form['instance']['settings']['nodeaccess_userreference']['author'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Grants for author'),
       '#default_value' => isset($data['author']) ? $data['author'] : array(),
@@ -58,8 +76,17 @@ function nodeaccess_userreference_form_field_ui_field_edit_form_alter(&$form, $f
       ),
       '#description' => t('These content access permissions will be granted to the authors of nodes.'),
     );
-
-    $form['field']['settings']['nodeaccess_userreference']['all'] = array(
+    $form['instance']['settings']['nodeaccess_userreference']['author_published'] = array(
+      '#type' => 'select',
+      '#title' => t('Unpublished nodes'),
+      '#title_display' => 'none',
+      '#default_value' => isset($data['author_published']) ? $data['author_published'] : 0,
+      '#options' => array(
+        0 => t('Give these grants for published nodes only'),
+        1 => t('Give these grants for published and unpublished nodes'),
+      ),
+    );
+    $form['instance']['settings']['nodeaccess_userreference']['all'] = array(
       '#type' => 'checkboxes',
       '#title' => t('Grants for all users'),
       '#default_value' => isset($data['all']) ? $data['all'] : array(),
@@ -73,7 +100,17 @@ function nodeaccess_userreference_form_field_ui_field_edit_form_alter(&$form, $f
         )
       ),
     );
-    $form['field']['settings']['nodeaccess_userreference']['unused'] = array(
+    $form['instance']['settings']['nodeaccess_userreference']['all_published'] = array(
+      '#type' => 'select',
+      '#title' => t('Unpublished nodes'),
+      '#title_display' => 'none',
+      '#default_value' => isset($data['all_published']) ? $data['all_published'] : 0,
+      '#options' => array(
+        0 => t('Give these grants for published nodes only'),
+        1 => t('Give these grants for published and unpublished nodes'),
+      ),
+    );
+    $form['instance']['settings']['nodeaccess_userreference']['unused'] = array(
       '#type' => 'radios',
       '#title' => t('When to set grants'),
       '#default_value' => isset($data['unused']) ? $data['unused'] : 0,
@@ -84,7 +121,7 @@ function nodeaccess_userreference_form_field_ui_field_edit_form_alter(&$form, $f
       '#description' => t('Determines whether to set grants when the field is not in use.'),
     );
     if (module_exists('views')) {
-      $form['field']['settings']['nodeaccess_userreference']['views'] = array(
+      $form['instance']['settings']['nodeaccess_userreference']['views'] = array(
         '#type' => 'fieldset',
         '#title' => t('Views - Nodes to use'),
         '#collapsible' => TRUE,
@@ -97,13 +134,13 @@ function nodeaccess_userreference_form_field_ui_field_edit_form_alter(&$form, $f
           . 'here.'
         ),
       );
-      $form['field']['settings']['nodeaccess_userreference']['views']['view'] = array(
+      $form['instance']['settings']['nodeaccess_userreference']['views']['view'] = array(
         '#type' => 'select',
         '#title' => t('View'),
         '#default_value' => isset($data['views']['view']) ? $data['views']['view'] : '',
         '#options' => nodeaccess_userreference_views_displays('node'),
       );
-      $form['field']['settings']['nodeaccess_userreference']['views']['view_args'] = array(
+      $form['instance']['settings']['nodeaccess_userreference']['views']['view_args'] = array(
         '#type' => 'textfield',
         '#title' => t('View arguments'),
         '#default_value' => isset($data['views']['view_args']) ? $data['views']['view_args'] : '',
@@ -111,22 +148,21 @@ function nodeaccess_userreference_form_field_ui_field_edit_form_alter(&$form, $f
       );
     }
     else {
-      $form['field']['settings']['nodeaccess_userreference']['views']['view'] = array(
+      $form['instance']['settings']['nodeaccess_userreference']['views']['view'] = array(
         '#type' => 'value',
         '#value' => isset($data['views']['view']) ? $data['views']['view'] : '',
       );
-      $form['field']['settings']['nodeaccess_userreference']['views']['view_args'] = array(
+      $form['instance']['settings']['nodeaccess_userreference']['views']['view_args'] = array(
         '#type' => 'value',
         '#value' => isset($data['views']['view_args']) ? $data['views']['view_args'] : '',
       );
     }
-    $form['field']['settings']['nodeaccess_userreference']['priority'] = array(
+    $form['instance']['settings']['nodeaccess_userreference']['priority'] = array(
       '#type' => 'weight',
       '#title' => t('Priority'),
       '#default_value' => isset($data['priority']) ? $data['priority'] : 0,
       '#description' => t('It is recommended to always leave this set to 0.'),
     );
-    $form['#submit'][] = 'nodeaccess_userreference_form_field_ui_field_edit_form_submit';
   }
 }
 
@@ -145,7 +181,7 @@ function nodeaccess_userreference_views_displays($base_table) {
         // Get display title.
        $display_title = nodeaccess_userreference_views_display_title($view_name, $view, $display_key);
         // Append $id to the title for disambiguation in lists.
-        $display_title .= ' ['. $id . ']';
+        $display_title .= ' [' . $id . ']';
 
         if ($view->type == 'Default') {
           $views[t('Default views')][$id] = $display_title;
@@ -167,23 +203,35 @@ function nodeaccess_userreference_views_display_title($view_name, $view, $displa
   $display_title = $view->get_title();
   if (!$display_title) {
     // No title, we have to construct a title.
-    $display_title = ucfirst($view_name) ." ". strtolower($view->display[$display_name]->display_title);
+    $display_title = ucfirst($view_name) . ' ' . strtolower($view->display[$display_name]->display_title);
   }
   return $display_title;
 }
 
 /**
- * Extra submit function for User reference field config.
+ * Implements hook_field_update_instance().
  */
-function nodeaccess_userreference_form_field_ui_field_edit_form_submit($form, &$form_state) {
-  $data = &$form_state['values']['field']['settings']['nodeaccess_userreference'];
-  $field_name = &$form_state['values']['instance']['field_name'];
-  $bundle_name = &$form_state['values']['instance']['bundle'];
-  nodeaccess_userreference_field_settings($bundle_name, $field_name, $data);
-  $nodes = node_load_multiple(NULL, array('type' => $bundle_name));
-  if ($nodes) {
-    // Because the field settings have changed we should prompt for a full rebuild.
-    node_access_needs_rebuild(TRUE);
+function nodeaccess_userreference_field_update_instance($instance, $prior_instance) {
+  $field_info = field_info_field($instance['field_name']);
+  if (
+    (
+      ($field_info['type'] == 'entityreference' && $field_info['settings']['target_type'] == 'user')
+      ||
+      $field_info['type'] == 'user_reference'
+    )
+    &&
+    $instance['entity_type'] == 'node'
+  ) {
+     nodeaccess_userreference_field_settings($instance['bundle'], $instance['field_name'], $instance['settings']['nodeaccess_userreference']);
+
+     $nodes = db_query("SELECT 1 FROM {node} WHERE type = :type", array(
+       ':type' => $instance['bundle'],
+     ))->fetchField();
+
+     if ($nodes) {
+       // Because the field settings have changed we should prompt for a full rebuild.
+       node_access_needs_rebuild(TRUE);
+     }
   }
 }
 
@@ -241,20 +289,33 @@ function nodeaccess_userreference_node_access_records($node) {
     foreach ($field_data as $field_name => &$data) {
       if (!empty($data) && (empty($data['views']['view']) || nodeaccess_userreference_node_in_field_view($data, array($node->nid)))) {
 
-        // Add referenced user grants.
-        $items = field_get_items('node', $node, $field_name);
-        if (!empty($items)) {
-          foreach ($items as &$user_reference) {
-            if ($user_reference['uid']) {
-              nodeaccess_userreference_add_grant(
-                $grants,
-                'nodeaccess_userreference',
-                $user_reference['uid'],
-                $data['priority'],
-                $data['referenced']
-              );
+        if (!empty($node->status) || !empty($data['referenced_published'])) {
+
+          // Add referenced user grants.
+          $items = field_get_items('node', $node, $field_name);
+          if (!empty($items)) {
+            foreach ($items as &$user_reference) {
+              $uid = NULL;
+              // user_reference
+              if (isset($user_reference['uid'])) {
+                $uid = $user_reference['uid'];
+              }
+              // entityreference
+              elseif (isset($user_reference['target_id'])) {
+                $uid = $user_reference['target_id'];
+              }
+              if ($uid) {
+                nodeaccess_userreference_add_grant(
+                  $grants,
+                  'nodeaccess_userreference',
+                  $uid,
+                  $data['priority'],
+                  $data['referenced']
+                );
+              }
             }
           }
+
         }
 
         if ($data['unused']) {
@@ -272,22 +333,26 @@ function nodeaccess_userreference_node_access_records($node) {
         // but redundant calls will be correctly handled by the helper function:
         // nodeaccess_userreference_add_grant().
         if (!empty($grants)) {
-           // Add author grants.
-           nodeaccess_userreference_add_grant(
-             $grants,
-             'nodeaccess_userreference_author',
-             $node->uid,
-             $data['priority'],
-             $data['author']
-           );
-           // Add all grants.
-           nodeaccess_userreference_add_grant(
-             $grants,
-             'nodeaccess_userreference_all',
-             1,
-             $data['priority'],
-             $data['all']
-           );
+          if (!empty($node->status) || !empty($data['author_published'])) {
+            // Add author grants.
+            nodeaccess_userreference_add_grant(
+              $grants,
+              'nodeaccess_userreference_author',
+              $node->uid,
+              $data['priority'],
+              $data['author']
+            );
+          }
+          if (!empty($node->status) || !empty($data['all_published'])) {
+            // Add all grants.
+            nodeaccess_userreference_add_grant(
+              $grants,
+              'nodeaccess_userreference_all',
+              1,
+              $data['priority'],
+              $data['all']
+            );
+          }
         }
       }
     }
@@ -324,33 +389,48 @@ function nodeaccess_userreference_node_access($node, $op, $account) {
   }
   else {
     // $op == 'create'.
-    $field_data = nodeaccess_userreference_field_settings($node);
-    if (!empty($field_data)) {
-      foreach ($field_data as $field_name => &$data) {
-        if (!empty($data->create[$node])) {
-          // Add referenced user grants.
-          $items = field_get_items('node', $node, $field_name);
-          if (!empty($items)) {
-            foreach ($items as &$user_reference) {
-              if ($user_reference['uid'] == $account->uid) {
-                $sql = 'SELECT DISTINCT fd.entity_id ' .
-                  'FROM {field_data_' . $field_name . '} fd ' .
-                  'INNER JOIN {node} n ON n.vid = fd.revision_id ' .
-                  'WHERE fd.' . $field_name . '_uid = :uid';
-                $args = array(':uid' => $account->uid);
-                $result = db_query($sql, $args);
-                if (empty($data['views']['view']) && $result->rowCount()) {
-                  // Simple case, a row exists, so we allow.
-                  return NODE_ACCESS_ALLOW;
-                }
-                else {
-                  // They are using views to restrict affected nodes.
-                  $nids = $result->fetchCol();
-                  if (!empty($nids) && nodeaccess_userreference_node_in_field_view($data, $nids)) {
-                    // At least one of the nodes is in the view, so allow.
-                    return NODE_ACCESS_ALLOW;
-                  }
-                }
+    // Get list of content types.
+    $types = node_type_get_types();
+    foreach ($types as $type) {
+      $bundle = $type->type;
+      // Get nodeaccess_userreference settings for every content type.
+      $field_data = nodeaccess_userreference_field_settings($bundle);
+      if (!empty($field_data)) {
+        // Content type has nodeaccess_userreference field.
+        foreach ($field_data as $field_name => $data) {
+          if (!empty($data['create'][$node])) {
+            // nodeaccess_userreference provides "create" grant for the content type we are checking access on.
+            $field_info = field_info_field($field_name);
+            // Check field_type so we can support entityreference fields as well as user_reference fields.
+            if ($field_info['type'] == 'user_reference') {
+              $sql = 'SELECT DISTINCT fd.entity_id ' .
+                     'FROM {field_data_' . $field_name . '} fd ' .
+                     'INNER JOIN {node} n ON n.vid = fd.revision_id ' .
+                     'WHERE fd.' . $field_name . '_uid = :uid ' .
+                     'AND fd.bundle = :bundle';
+            }
+            elseif ($field_info['type'] == 'entityreference') {
+              $sql = 'SELECT DISTINCT fd.entity_id ' .
+                     'FROM {field_data_' . $field_name . '} fd ' .
+                     'INNER JOIN {node} n ON n.vid = fd.revision_id ' .
+                     'WHERE fd.' . $field_name . '_target_id = :uid ' .
+                     'AND fd.bundle = :bundle';
+            }
+            $args = array(
+              ':uid' => $account->uid,
+              ':bundle' => $bundle,
+            );
+            $result = db_query($sql, $args);
+            if (empty($data['views']['view']) && $result->rowCount()) {
+              // Simple case, a row exists, so we allow.
+              return NODE_ACCESS_ALLOW;
+            }
+            else {
+              // They are using views to restrict affected nodes.
+              $nids = $result->fetchCol();
+              if (!empty($nids) && nodeaccess_userreference_node_in_field_view($data, $nids)) {
+                // At least one of the nodes is in the view, so allow.
+                return NODE_ACCESS_ALLOW;
               }
             }
           }

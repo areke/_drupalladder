@@ -53,7 +53,7 @@ function lessons_prerequisites_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => '0',
+          'weight' => '4',
         ),
         'teaser' => array(
           'label' => 'above',
