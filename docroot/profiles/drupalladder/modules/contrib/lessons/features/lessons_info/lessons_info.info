@@ -20,10 +20,3 @@ features[field][] = "node-lesson-field_lesson_type"
 features[field_group][] = "group_lesson_info|node|lesson|form"
 features[taxonomy][] = "lesson_tags"
 features[taxonomy][] = "tags"
-
-; Information added by drupal.org packaging script on 2012-08-12
-version = "7.x-1.0-alpha9"
-core = "7.x"
-project = "lessons"
-datestamp = "1344804761"
-

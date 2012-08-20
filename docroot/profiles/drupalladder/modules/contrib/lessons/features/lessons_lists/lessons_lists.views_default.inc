@@ -39,14 +39,72 @@ function lessons_lists_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['more_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 0;
+  /* Field: Content: Node UUID */
+  $handler->display->display_options['fields']['uuid']['id'] = 'uuid';
+  $handler->display->display_options['fields']['uuid']['table'] = 'node';
+  $handler->display->display_options['fields']['uuid']['field'] = 'uuid';
+  $handler->display->display_options['fields']['uuid']['label'] = '';
+  $handler->display->display_options['fields']['uuid']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['uuid']['alter']['text'] = 'Go to <strong>Ladder</strong>';
+  $handler->display->display_options['fields']['uuid']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['uuid']['alter']['path'] = 'ladder/[uuid]';
+  $handler->display->display_options['fields']['uuid']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['uuid']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['uuid']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['uuid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uuid']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['uuid']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['uuid']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['uuid']['hide_alter_empty'] = 1;
+  /* Field: Content: Node UUID */
+  $handler->display->display_options['fields']['uuid_1']['id'] = 'uuid_1';
+  $handler->display->display_options['fields']['uuid_1']['table'] = 'node';
+  $handler->display->display_options['fields']['uuid_1']['field'] = 'uuid';
+  $handler->display->display_options['fields']['uuid_1']['label'] = '';
+  $handler->display->display_options['fields']['uuid_1']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['uuid_1']['alter']['text'] = 'Go to <strong>Node</strong>';
+  $handler->display->display_options['fields']['uuid_1']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['uuid_1']['alter']['path'] = 'curriculum/[uuid_1] ';
+  $handler->display->display_options['fields']['uuid_1']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['uuid_1']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['uuid_1']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uuid_1']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['uuid_1']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['uuid_1']['hide_alter_empty'] = 1;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -65,7 +123,7 @@ function lessons_lists_views_default_views() {
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'curriculum' => 'curriculum',
-  );
+    );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
