@@ -11,7 +11,7 @@ api = 2
 
 ; Contrib projects
 ; ----------------
-projects[ctools][version] = 1.0
+projects[ctools][version] = 1.2
 projects[ctools][subdir] = contrib
 
 projects[devel][version] = 1.2
@@ -53,13 +53,14 @@ projects[lessons][subdir] = contrib
 projects[mollom][version] = 2.0
 projects[mollom][subdir] = contrib
 
-projects[node_export][type] = module
-projects[node_export][download][type] = git
-; Node Export version 7.x-3.x-dev including commit:
-; http://drupal.org/commitlog/commit/6132/301c61096282cebfdfd23ee64aef7d194f3138e7
-; to fix "Undefined property user name error" http://drupal.org/node/1467976
-projects[node_export][download][branch] = 7.x-3.x
-projects[node_export][download][revision] = 301c61096282cebfdfd23ee64aef7d194f3138e7
+; projects[node_export][type] = module
+; projects[node_export][download][type] = git
+; ; Node Export version 7.x-3.x-dev including commit:
+; ; http://drupal.org/commitlog/commit/6132/301c61096282cebfdfd23ee64aef7d194f3138e7
+; ; to fix "Undefined property user name error" http://drupal.org/node/1467976
+; projects[node_export][download][branch] = 7.x-3.x
+; projects[node_export][download][revision] = 301c61096282cebfdfd23ee64aef7d194f3138e7
+projects[node_export][version] = 3.0
 projects[node_export][subdir] = contrib
 
 projects[panels][version] = 3.2
@@ -86,14 +87,15 @@ projects[token][subdir] = contrib
 projects[nodeaccess_userreference][version] = 3.9
 projects[nodeaccess_userreference][subdir] = contrib
 
-projects[uuid][type] = module
-projects[uuid][download][type] = git
-; UUID version 7.x-2.x-dev including commit:
-; http://drupalcode.org/project/uuid.git/commitdiff/c2bb83250451c96be843d11837a43f98d414c76f
-; (see http://drupal.org/node/1423542#comment-5555026 )
-; to avoid Undefined Index error. Should be unnecessary after 7.x-1.0-alpha3.
-projects[uuid][download][branch] = 7.x-1.x
-projects[uuid][download][revision] = c2bb83250451c96be843d11837a43f98d414c76f
+; projects[uuid][type] = module
+; projects[uuid][download][type] = git
+; ; UUID version 7.x-2.x-dev including commit:
+; ; http://drupalcode.org/project/uuid.git/commitdiff/c2bb83250451c96be843d11837a43f98d414c76f
+; ; (see http://drupal.org/node/1423542#comment-5555026 )
+; ; to avoid Undefined Index error. Should be unnecessary after 7.x-1.0-alpha3.
+; projects[uuid][download][branch] = 7.x-1.x
+; projects[uuid][download][revision] = c2bb83250451c96be843d11837a43f98d414c76f
+projects[uuid][version] = 1.0-alpha3
 projects[uuid][subdir] = contrib
 
 projects[views][version] = 3.3
