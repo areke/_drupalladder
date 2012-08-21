@@ -12,7 +12,6 @@ dependencies[] = contextual
 dependencies[] = dashboard
 dependencies[] = help
 dependencies[] = image
-dependencies[] = lessons
 dependencies[] = list
 dependencies[] = menu
 dependencies[] = number
@@ -39,14 +38,14 @@ dependencies[] = entityreference
 dependencies[] = features
 dependencies[] = field_group 
 dependencies[] = flag 
-dependencies[] = ladder
-dependencies[] = lessons
+; dependencies[] = ladder
+; dependencies[] = lessons
 dependencies[] = pathauto
 dependencies[] = token
 dependencies[] = node_export
 dependencies[] = node_export_serialize
 dependencies[] = node_export_features
-dependencies[] = nodeaccess_userreference
+; dependencies[] = nodeaccess_userreference
 ; dependencies[] = services
 dependencies[] = strongarm
 dependencies[] = uuid
@@ -54,17 +53,17 @@ dependencies[] = uuid
 
 ; features
 ; ---------
-dependencies[] = lessons_bookmarks
-dependencies[] = lessons_completed
-dependencies[] = lessons_curriculum
-dependencies[] = lessons_draft_status
-dependencies[] = lessons_info
-dependencies[] = lessons_lesson
-dependencies[] = lessons_lists
-dependencies[] = lessons_maintainers
-dependencies[] = lessons_prerequisites
-dependencies[] = lessons_recommendations
-dependencies[] = lessons_uuid
+; dependencies[] = lessons_bookmarks
+; dependencies[] = lessons_completed
+; dependencies[] = lessons_curriculum
+; dependencies[] = lessons_draft_status
+; dependencies[] = lessons_info
+; dependencies[] = lessons_lesson
+; dependencies[] = lessons_lists
+; dependencies[] = lessons_maintainers
+; dependencies[] = lessons_prerequisites
+; dependencies[] = lessons_recommendations
+; dependencies[] = lessons_uuid
 
 ; custom modules
 ; ---------------
@@ -73,11 +72,11 @@ dependencies[] = join
 
 ; custom features
 ; ----------------
-dependencies[] = learn_default_site_settings
-dependencies[] = learn_lesson_content
-dependencies[] = learn_node_export_settings
-dependencies[] = learn_page
-dependencies[] = learn_text_format_filters
+; dependencies[] = learn_default_site_settings
+; dependencies[] = learn_lesson_content
+; dependencies[] = learn_node_export_settings
+; dependencies[] = learn_page
+; dependencies[] = learn_text_format_filters
 
 ; files
 ; --------

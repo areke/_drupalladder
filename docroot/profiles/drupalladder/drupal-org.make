@@ -83,7 +83,7 @@ projects[strongarm][subdir] = contrib
 projects[token][version] = 1.1
 projects[token][subdir] = contrib
 
-projects[nodeaccess_userreference][version] = 3.8
+projects[nodeaccess_userreference][version] = 3.9
 projects[nodeaccess_userreference][subdir] = contrib
 
 projects[uuid][type] = module
