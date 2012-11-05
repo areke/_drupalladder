@@ -1,7 +1,7 @@
 name = "Learn Node Export Settings"
 description = "Settings for Node Export module"
 core = "7.x"
-package = "Learn"
+package = "Drupal Ladder"
 version = "7.x-1.0-alpha1"
 project = "learn_node_export_settings"
 dependencies[] = "ctools"
@@ -29,3 +29,10 @@ features[variable][] = "node_export_reset_page"
 features[variable][] = "node_export_reset_path_curriculum"
 features[variable][] = "node_export_reset_path_lesson"
 features[variable][] = "node_export_reset_path_page"
+
+; Information added by drupal.org packaging script on 2012-11-05
+version = "7.x-1.0-alpha16"
+core = "7.x"
+project = "drupalladder"
+datestamp = "1352076369"
+

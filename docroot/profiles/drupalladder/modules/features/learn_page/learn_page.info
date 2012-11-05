@@ -1,7 +1,7 @@
 name = "Page"
 description = "Drupal's standard "Basic page" content type"
 core = "7.x"
-package = "Learn"
+package = "Drupal Ladder"
 version = "7.x-1.0"
 project = "learn_page"
 dependencies[] = "ctools"
@@ -16,3 +16,10 @@ features[node][] = "page"
 features[variable][] = "comment_page"
 features[variable][] = "node_options_page"
 features[variable][] = "node_submitted_page"
+
+; Information added by drupal.org packaging script on 2012-11-05
+version = "7.x-1.0-alpha16"
+core = "7.x"
+project = "drupalladder"
+datestamp = "1352076369"
+

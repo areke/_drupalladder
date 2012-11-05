@@ -1,7 +1,7 @@
 name = "Learn Lesson Content"
-description = "Lessons and curriculums included with Learn Drupal distro"
+description = "Lessons and ladders included with Learn Drupal distro"
 core = "7.x"
-package = "Learn"
+package = "Drupal Ladder"
 version = "7.x-1.0"
 project = "learn_lesson_content"
 dependencies[] = "lessons_curriculum"
@@ -23,3 +23,10 @@ features[node_export_features][] = "de7dca9e-7b05-a934-4558-818813bd0619"
 features[node_export_features][] = "e0a5e06e-d0f0-d364-d9ef-7193e5393410"
 features[node_export_features][] = "ee503327-50be-1904-8d04-9499098cad64"
 features[node_export_features][] = "f6499034-7520-2db4-6522-c32c8429e2d7"
+
+; Information added by drupal.org packaging script on 2012-11-05
+version = "7.x-1.0-alpha16"
+core = "7.x"
+project = "drupalladder"
+datestamp = "1352076369"
+

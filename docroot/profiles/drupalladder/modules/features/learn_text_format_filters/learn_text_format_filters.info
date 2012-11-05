@@ -1,7 +1,7 @@
 name = "Text format filters"
 description = "Drupal's standard text format filters: Filtered HTML, Full HTML, Plain text"
 core = "7.x"
-package = "Learn"
+package = "Drupal Ladder"
 version = "7.x-1.0"
 project = "learn_text_format_filters"
 dependencies[] = "features"
@@ -9,3 +9,10 @@ dependencies[] = "filter"
 features[filter][] = "filtered_html"
 features[filter][] = "full_html"
 features[filter][] = "plain_text"
+
+; Information added by drupal.org packaging script on 2012-11-05
+version = "7.x-1.0-alpha16"
+core = "7.x"
+project = "drupalladder"
+datestamp = "1352076369"
+
