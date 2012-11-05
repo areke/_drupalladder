@@ -11,18 +11,18 @@ function lessons_lists_views_default_views() {
   $export = array();
 
   $view = new view;
-  $view->name = 'lessons_list_curriculums';
+  $view->name = 'lessons_list_ladders';
   $view->description = '';
   $view->tag = 'default';
   $view->base_table = 'node';
-  $view->human_name = 'Lessons: List Curriculums';
+  $view->human_name = 'Lessons: List Ladders';
   $view->core = 7;
   $view->api_version = '3.0';
   $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
-  $handler->display->display_options['title'] = 'Curriculums';
+  $handler->display->display_options['title'] = 'Ladders';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -39,14 +39,47 @@ function lessons_lists_views_default_views() {
   $handler->display->display_options['fields']['title']['alter']['alter_text'] = 0;
   $handler->display->display_options['fields']['title']['alter']['make_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['nl2br'] = 0;
   $handler->display->display_options['fields']['title']['alter']['word_boundary'] = 0;
   $handler->display->display_options['fields']['title']['alter']['ellipsis'] = 0;
+  $handler->display->display_options['fields']['title']['alter']['more_link'] = 0;
   $handler->display->display_options['fields']['title']['alter']['strip_tags'] = 0;
   $handler->display->display_options['fields']['title']['alter']['trim'] = 0;
   $handler->display->display_options['fields']['title']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['title']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['title']['element_default_classes'] = 1;
   $handler->display->display_options['fields']['title']['hide_empty'] = 0;
   $handler->display->display_options['fields']['title']['empty_zero'] = 0;
-  $handler->display->display_options['fields']['title']['link_to_node'] = 1;
+  $handler->display->display_options['fields']['title']['hide_alter_empty'] = 1;
+  $handler->display->display_options['fields']['title']['link_to_node'] = 0;
+  /* Field: Content: Node UUID */
+  $handler->display->display_options['fields']['uuid']['id'] = 'uuid';
+  $handler->display->display_options['fields']['uuid']['table'] = 'node';
+  $handler->display->display_options['fields']['uuid']['field'] = 'uuid';
+  $handler->display->display_options['fields']['uuid']['label'] = '';
+  $handler->display->display_options['fields']['uuid']['alter']['alter_text'] = 1;
+  $handler->display->display_options['fields']['uuid']['alter']['text'] = 'Go to <strong>Ladder</strong>';
+  $handler->display->display_options['fields']['uuid']['alter']['make_link'] = 1;
+  $handler->display->display_options['fields']['uuid']['alter']['path'] = 'ladder/[uuid]';
+  $handler->display->display_options['fields']['uuid']['alter']['absolute'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['external'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['replace_spaces'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['trim_whitespace'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['nl2br'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['word_boundary'] = 1;
+  $handler->display->display_options['fields']['uuid']['alter']['ellipsis'] = 1;
+  $handler->display->display_options['fields']['uuid']['alter']['more_link'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['strip_tags'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['trim'] = 0;
+  $handler->display->display_options['fields']['uuid']['alter']['html'] = 0;
+  $handler->display->display_options['fields']['uuid']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['uuid']['element_default_classes'] = 1;
+  $handler->display->display_options['fields']['uuid']['hide_empty'] = 0;
+  $handler->display->display_options['fields']['uuid']['empty_zero'] = 0;
+  $handler->display->display_options['fields']['uuid']['hide_alter_empty'] = 1;
   /* Sort criterion: Content: Post date */
   $handler->display->display_options['sorts']['created']['id'] = 'created';
   $handler->display->display_options['sorts']['created']['table'] = 'node';
@@ -64,18 +97,18 @@ function lessons_lists_views_default_views() {
   $handler->display->display_options['filters']['type']['table'] = 'node';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
-    'curriculum' => 'curriculum',
+    'ladder' => 'ladder',
   );
 
   /* Display: Page */
   $handler = $view->new_display('page', 'Page', 'page');
-  $handler->display->display_options['path'] = 'curriculums';
+  $handler->display->display_options['path'] = 'ladders';
   $handler->display->display_options['menu']['type'] = 'normal';
-  $handler->display->display_options['menu']['title'] = 'Curriculums';
+  $handler->display->display_options['menu']['title'] = 'Ladders';
   $handler->display->display_options['menu']['weight'] = '6';
   $handler->display->display_options['menu']['name'] = 'main-menu';
   $handler->display->display_options['menu']['context'] = 0;
-  $export['lessons_list_curriculums'] = $view;
+  $export['lessons_list_ladders'] = $view;
 
   $view = new view;
   $view->name = 'lessons_lists_lessons';
@@ -424,13 +457,6 @@ function lessons_lists_views_default_views() {
   $handler->display->display_options['filters']['field_lesson_draft_status_value']['id'] = 'field_lesson_draft_status_value';
   $handler->display->display_options['filters']['field_lesson_draft_status_value']['table'] = 'field_data_field_lesson_draft_status';
   $handler->display->display_options['filters']['field_lesson_draft_status_value']['field'] = 'field_lesson_draft_status_value';
-  $handler->display->display_options['filters']['field_lesson_draft_status_value']['value'] = array(
-    'all' => 'all',
-    'draft' => 'draft',
-    'ready-for-review' => 'ready-for-review',
-    'needs-revision' => 'needs-revision',
-    'up-to-date' => 'up-to-date',
-  );
   $handler->display->display_options['filters']['field_lesson_draft_status_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_lesson_draft_status_value']['expose']['operator_id'] = 'field_lesson_draft_status_value_op';
   $handler->display->display_options['filters']['field_lesson_draft_status_value']['expose']['label'] = 'Draft Status';

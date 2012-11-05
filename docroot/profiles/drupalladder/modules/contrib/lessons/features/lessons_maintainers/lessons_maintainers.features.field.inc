@@ -93,7 +93,7 @@ function lessons_maintainers_field_default_fields() {
           ),
           'author_published' => '1',
           'create' => array(
-            'curriculum' => 0,
+            'ladder' => 0,
             'lesson' => 0,
             'page' => 0,
           ),

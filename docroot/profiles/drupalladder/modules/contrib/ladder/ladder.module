@@ -2,108 +2,215 @@
 
 /**
  * @file
- * Displays a curriculum node in the form of a ladder.
+ * Displays a Ladder, which may be made up of sections, listing Lessons in each
+ * section.
  */
+
+include_once 'ladder.features.inc';
 
 
 /**
  * Implements hook_menu().
  */
 function ladder_menu() {
-  $items['ladder/%'] = array(
-    'page callback' => 'ladder_page_view',
+  // Redirect the old curriculum path
+  $items['curriculum/%'] = array(
+    'page callback' => 'ladder_page_redirect',
     'page arguments' => array(1),
-    //'access callback' => 'node_access',
     'access arguments' => array('access content'),
   );
   return $items;
 }
 
+
 /**
- * Implements hook_theme().
+ * Callback to support old curriculum/[uuid] path. Redirect to ladder/[uuid]
  */
-/*
-function ladder_theme() {
+function ladder_page_redirect($id) {
+  drupal_goto('ladder/' . $id);
 }
-// */
+
 
 /**
- * Callback for path: ladder/[id].
- * 
- * @param $id
- *  String. Node id or UUID for a curriculum node.
- * 
- * @return $build
- *  TODO Renderable array.
+ * Implements hook_preprocess_node().
  */
-function ladder_page_view($id) {
-  // Get node id.
-  if (is_numeric($id)) {
-    // $id is a node id.
-    $nid = $id;
-  }
-  else {
-    // $id is either a UUID or it is not valid.
-    $nids = entity_get_id_by_uuid('node', array($id));
-    $nid = $nids[$id];
-  }
-
-  // Load requested node.
-  if (!$node = node_load($nid)) {
-    // Node didn't load. Return error message.
-    $path = current_path();
-    $text = t('@path is not a valid path. @id must be a valid curriculum node ID or UUID.', array('@path' => $path, '@id' => $id));
-    drupal_set_message($text, 'warning');
-    return '';
-  }
-
-  // Make sure node is a curriculum.
-  if (!$node->type == 'curriculum') {
-    // Not a valid node type. Return error message.
-    $text = t('!name is not a curriculum.', array('!name' => l(check_plain($node->title), "node/$node->nid")));
-    drupal_set_message($text, 'warning');
-    return '';
-  }
-
-  drupal_set_title(t('@curriculum', array('@curriculum' => $node->title)));
-
-  // Curriculum overview.
-  $output = render(field_view_field('node', $node, 'field_curriculum_overview'));
-
-  if ($lessons = field_get_items('node', $node, 'field_curriculum_lessons')) {
-    // Lessons are displayed in reverse order.
-    krsort($lessons);
-    foreach ($lessons as $lesson) {
-      // Build row from lesson node.
-      $lesson = node_load($lesson['target_id']);
-      $row = array();
-      $row['title'] = l($lesson->title, 'node/' . $lesson->nid);
-      $row['flag'] = flag_create_link('lessons_complete', $lesson->nid);
-      $rows[] = $row;
-    }
-  }
-
-  // Generate output.
-  if (empty($rows)) {
-    $output .= t('There are no lessons in this curriculum.');
-  }
-  else {
+function ladder_preprocess_node(&$vars) {
+  if ($vars['type'] == 'ladder') {
     drupal_add_css(drupal_get_path('module', 'ladder') . '/ladder.css');
-    // Top of the ladder.
-    $output .= '<div class="ladder"><div class="ladder-top">';
-    $output .= '</div></div>';
-    // Ladder rungs.
-    foreach ($rows as $row) {
-      // @todo add status based on flag.
-      $output .= '<div class="ladder clearfix"><div class="ladder-rung"></div>';
-      $output .= '<span class="title">' . $row['title'] .'</span>';
-      $output .= '<span class="flag">'. $row['flag'] . '</span>';
-      $output .= '</div>';
+
+    // Show an empty message if there are no lessons
+    if (!isset($vars['content']['field_ladder_sections']) || empty($vars['content']['field_ladder_sections'])) {
+      $vars['content']['field_ladder_sections'] = array(
+        '#markup' => t('There are no lessons in this ladder.'),
+        '#weight' => 1, // Weight higher than the Overview
+      );
     }
-    // Bottom of the ladder.
-    $output .= '<div class="ladder"><div class="ladder-bottom">';
-    $output .= '</div></div>';
+  }
+}
+
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function ladder_field_formatter_info() {
+  return array(
+    'field_collection_ladder' => array(
+      'label' => t('Ladder'),
+      'field types' => array('field_collection'),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function ladder_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  $settings = $display['settings'];
+
+  switch ($display['type']) {
+    // Display a Field Collection as a ladder
+    case 'field_collection_ladder':
+      $node = $entity;
+
+      // Determine if the current user is a maintainer of this ladder
+      if (node_access('update', $node)) {
+        $is_maintainer = TRUE;
+      }
+      else {
+        // Check if the user is a maintainer of this ladder
+        $is_maintainer = FALSE;
+        $maintainers = field_get_items('node', $node, 'field_ladder_maintainers');
+        if (!empty($maintainers) && is_array($maintainers)) {
+          foreach ($maintainers as $maintainer) {
+            if ($maintainer['target_id'] == $GLOBALS['user']->uid) {
+              $is_maintainer = TRUE;
+              break;
+            }
+          }
+        }
+      }
+
+      // Reverse the sections so that the basic appear at bottom, advanced at top.
+      $sections = array_reverse($items);
+      foreach ($sections as $delta => $item) {
+        $output = '';
+        $rows = array();
+
+        if ($field_collection = field_collection_field_get_entity($item)) {
+          // Find the title for this section. Probably a better way to do this?
+          if (!empty($field_collection->field_section_title)) {
+            $title = $field_collection->field_section_title[LANGUAGE_NONE][0]['safe_value'];
+          }
+          else {
+            $title = NULL;
+          }
+          $lessons = $field_collection->field_ladder_lessons[LANGUAGE_NONE];
+
+          // Make the title the first row. Don't set it if there are no lessons
+          // in this section, though, because the section won't be displayed.
+          if (!empty($title) && !empty($lessons)) {
+            $row = array(
+              'title' => '<h3>' . $title . '</h3>',
+              'classes' => array('section-title'),
+            );
+            $rows[] = $row;
+          }
+
+          // Lessons are displayed in reverse order.
+          krsort($lessons);
+          foreach ($lessons as $rung_index => $lesson) {
+            // Build row from lesson node.
+            $lesson = node_load($lesson['target_id']);
+            $row = array();
+
+            $row['classes'] = array('ladder-rung');
+
+            $row['title'] = l($lesson->title, 'node/' . $lesson->nid);
+            $row['flag_complete'] = flag_create_link('lessons_complete', $lesson->nid);
+            $flag = flag_get_flag('lessons_provisional');
+            if (is_object($flag)) {
+              $row['flag_provisional_status'] = $flag->is_flagged($lesson->nid);
+            }
+            if (isset($row['flag_provisional_status']) && !empty($row['flag_provisional_status'])) {
+              $row['classes'][] = 'ladder-rung-provisional';
+            }
+            if ($is_maintainer) {
+              $row['flag_provisional'] = flag_create_link('lessons_provisional', $lesson->nid);
+            }
+            $rows[] = $row;
+          }
+
+          // Generate output.
+          drupal_add_css(drupal_get_path('module', 'ladder') . '/ladder.css');
+
+          // Ladder rungs.
+          foreach ($rows as $row) {
+            // @todo add status based on flag.
+            $output .= '<div class="ladder clearfix"><div class="' . implode(' ', $row['classes']) . '"><div class="rung-line"></div></div>';
+            $output .= '<span class="title">' . $row['title'] .'</span>';
+            if (isset($row['flag_complete'])) {
+              $output .= '<span class="flag_complete">'. $row['flag_complete'] . '</span>';
+            }
+            if ($is_maintainer && isset($row['flag_provisional'])) {
+              $output .= '<span class="flag_provisional">'. $row['flag_provisional'] . '</span>';
+            }
+            $output .= '</div>';
+          }
+
+          $element[$delta]['#markup'] = $output;
+        }
+      }
+      break;
   }
 
-  return $output;
+  return $element;
+}
+
+
+/**
+ * Determine which ladders that the given lesson appears in.
+ *
+ * @param $lesson_nid
+ *   Lesson Node ID
+ *
+ * @return array
+ *   Array of Ladder node IDs, or empty if none are found.
+ */
+function ladder_get_ladders_for_lesson($lesson_nid) {
+  $ladder_nids = array();
+
+  // Validate input
+  if (!($lesson_nid > 0)) {
+    return $ladder_nids;
+  }
+
+  // Query for ladder sections that contain the lesson nid
+  $query = new EntityFieldQuery();
+  $query->entityCondition('entity_type', 'field_collection_item')
+    ->fieldCondition('field_ladder_lessons', 'target_id', $lesson_nid, '=');
+  $ladder_sections = $query->execute();
+
+  // If we get some results...
+  if (isset($ladder_sections['field_collection_item'])) {
+    // Loop over the returned ladder sections to determine what ladder node they
+    // belong to
+    foreach ($ladder_sections['field_collection_item'] as $ladder_section_id => $ladder_section_info) {
+      // Query for the ladder node that owns this section
+      $section_query = new EntityFieldQuery();
+      $section_query->entityCondition('entity_type', 'node')
+        ->entityCondition('bundle', 'ladder')
+        ->fieldCondition('field_ladder_sections', 'value', $ladder_section_id, '=');
+      $ladder_nodes = $section_query->execute();
+
+      // If a ladder node was found...
+      if (isset($ladder_nodes['node'])) {
+        // Add the ladder node IDs to the array
+        $ladder_nids = array_merge($ladder_nids, array_keys($ladder_nodes['node']));
+      }
+    }
+  }
+
+  return $ladder_nids;
 }
