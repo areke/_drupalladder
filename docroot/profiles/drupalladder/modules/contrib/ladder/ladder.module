@@ -214,3 +214,16 @@ function ladder_get_ladders_for_lesson($lesson_nid) {
 
   return $ladder_nids;
 }
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function ladder_form_ladder_node_form_alter(&$form, &$form_state) {
+  if (is_array($form['field_ladder_sections'])) {
+    // Move the Ladder Sections field description up above the field so that
+    // it's more visible.
+    $form['field_ladder_sections'][LANGUAGE_NONE]['#prefix'] = $form['field_ladder_sections'][LANGUAGE_NONE]['#description'];
+    $form['field_ladder_sections'][LANGUAGE_NONE]['#description'] = '';
+  }
+}

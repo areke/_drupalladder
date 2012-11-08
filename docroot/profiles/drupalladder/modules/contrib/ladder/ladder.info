@@ -10,7 +10,6 @@ dependencies[] = "features"
 dependencies[] = "field_collection"
 dependencies[] = "lessons_completed"
 dependencies[] = "lessons_lesson"
-dependencies[] = "lessons_provisional"
 dependencies[] = "strongarm"
 features[ctools][] = "strongarm:strongarm:1"
 features[field][] = "field_collection_item-field_ladder_sections-field_ladder_lessons"
@@ -32,9 +31,9 @@ features[variable][] = "node_options_ladder"
 features[variable][] = "node_preview_ladder"
 features[variable][] = "node_submitted_ladder"
 
-; Information added by drupal.org packaging script on 2012-11-04
-version = "7.x-1.0-alpha4"
+; Information added by drupal.org packaging script on 2012-11-08
+version = "7.x-1.0-alpha5"
 core = "7.x"
 project = "ladder"
-datestamp = "1352069811"
+datestamp = "1352341017"
 
