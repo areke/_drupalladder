@@ -531,7 +531,7 @@ $conf['404_fast_html'] = '<html xmlns="http://www.w3.org/1999/xhtml"><head><titl
 // settings.php for development on your local workstation, set $db_url
 // (Drupal 5 or 6) or $databases (Drupal 7) as described in comments above.
 if (file_exists('/var/www/site-php')) {
-  require('/var/www/site-php/bryanhirsch/bryanhirsch-settings.inc');
+  require('/var/www/site-php/drupalladder/drupalladder-settings.inc');
 }
 
 //$conf['profile'] = 'drupalladder';
