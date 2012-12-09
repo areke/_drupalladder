@@ -6,6 +6,7 @@
  * Perform actions to set up the site for this profile.
  */
 function drupalladder_install() {
+  /*
   // Note: These filters are stored in the feature module drupalladder_text_format_filters. 
   // But if this step is omitted, we get a big ugly error during installation. This 
   // is probably triggered by the node_save, using one of these input formats, at the end
@@ -346,6 +347,7 @@ function drupalladder_install() {
   $node->menu['weight'] = 10;
   $node->menu['description'] = 'Documentation and references';
   $node = node_save($node);
+  // */
 }
 
 /**

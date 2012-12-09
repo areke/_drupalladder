@@ -19,13 +19,13 @@ function lessons_bookmarks_views_api() {
  */
 function lessons_bookmarks_flag_default_flags() {
   $flags = array();
-  // Exported flag: "Bookmarks lessons and curriculums".
+  // Exported flag: "Bookmarks lessons and ladders".
   $flags['lessons_bookmark'] = array(
     'content_type' => 'node',
-    'title' => 'Bookmarks lessons and curriculums',
+    'title' => 'Bookmarks lessons and ladders',
     'global' => '0',
     'types' => array(
-      0 => 'curriculum',
+      0 => 'ladder',
       1 => 'lesson',
     ),
     'flag_short' => 'Not bookmarked',

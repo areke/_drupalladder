@@ -536,7 +536,11 @@ if (file_exists('/var/www/site-php')) {
 //$conf['profile'] = 'drupalladder';
 $conf['install_profile'] = 'drupalladder';
 
+/*
+// Uncomment below for testing.
+// http://dgd7.org/err
 error_reporting(-1);  // Have PHP complain about absolutely everything.
 $conf['error_level'] = 2;  // Show all messages on your screen
 ini_set('display_errors', TRUE);  // These lines give you content on WSOD pages.
 ini_set('display_startup_errors', TRUE);
+// */
