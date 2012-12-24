@@ -54,9 +54,9 @@ function ladder_preprocess_node(&$vars) {
  */
 function ladder_field_formatter_info() {
   return array(
-    'field_collection_ladder' => array(
+    'ladder_ladder' => array(
       'label' => t('Ladder'),
-      'field types' => array('field_collection'),
+      'field types' => array('entityreference'),
     ),
   );
 }
@@ -71,7 +71,7 @@ function ladder_field_formatter_view($entity_type, $entity, $field, $instance, $
 
   switch ($display['type']) {
     // Display a Field Collection as a ladder
-    case 'field_collection_ladder':
+    case 'ladder_ladder':
       $node = $entity;
 
       // Determine if the current user is a maintainer of this ladder
@@ -92,75 +92,50 @@ function ladder_field_formatter_view($entity_type, $entity, $field, $instance, $
         }
       }
 
-      // Reverse the sections so that the basic appear at bottom, advanced at top.
-      $sections = array_reverse($items);
-      foreach ($sections as $delta => $item) {
-        $output = '';
-        $rows = array();
+      // Gather the lessons
+      if ($lessons = field_get_items('node', $node, 'field_lessons')) {
+        foreach ($lessons as $rung_index => $lesson) {
+          // Build row from lesson node.
+          $lesson_node = node_load($lesson['target_id']);
+          $row = array();
 
-        if ($field_collection = field_collection_field_get_entity($item)) {
-          // Find the title for this section. Probably a better way to do this?
-          if (!empty($field_collection->field_section_title)) {
-            $title = $field_collection->field_section_title[LANGUAGE_NONE][0]['safe_value'];
+          $row['classes'] = array('ladder-rung');
+
+          $row['title'] = l($lesson_node->title, 'node/' . $lesson_node->nid);
+          $row['flag_complete'] = flag_create_link('lessons_complete', $lesson_node->nid);
+          $flag = flag_get_flag('lessons_provisional');
+          if (is_object($flag)) {
+            $row['flag_provisional_status'] = $flag->is_flagged($lesson_node->nid);
           }
-          else {
-            $title = NULL;
+          if (isset($row['flag_provisional_status']) && !empty($row['flag_provisional_status'])) {
+            $row['classes'][] = 'ladder-rung-provisional';
           }
-          $lessons = $field_collection->field_ladder_lessons[LANGUAGE_NONE];
-
-          // Make the title the first row. Don't set it if there are no lessons
-          // in this section, though, because the section won't be displayed.
-          if (!empty($title) && !empty($lessons)) {
-            $row = array(
-              'title' => '<h3>' . $title . '</h3>',
-              'classes' => array('section-title'),
-            );
-            $rows[] = $row;
+          if ($is_maintainer) {
+            $row['flag_provisional'] = flag_create_link('lessons_provisional', $lesson_node->nid);
           }
-
-          // Lessons are displayed in reverse order.
-          krsort($lessons);
-          foreach ($lessons as $rung_index => $lesson) {
-            // Build row from lesson node.
-            $lesson = node_load($lesson['target_id']);
-            $row = array();
-
-            $row['classes'] = array('ladder-rung');
-
-            $row['title'] = l($lesson->title, 'node/' . $lesson->nid);
-            $row['flag_complete'] = flag_create_link('lessons_complete', $lesson->nid);
-            $flag = flag_get_flag('lessons_provisional');
-            if (is_object($flag)) {
-              $row['flag_provisional_status'] = $flag->is_flagged($lesson->nid);
-            }
-            if (isset($row['flag_provisional_status']) && !empty($row['flag_provisional_status'])) {
-              $row['classes'][] = 'ladder-rung-provisional';
-            }
-            if ($is_maintainer) {
-              $row['flag_provisional'] = flag_create_link('lessons_provisional', $lesson->nid);
-            }
-            $rows[] = $row;
-          }
-
-          // Generate output.
-          drupal_add_css(drupal_get_path('module', 'ladder') . '/ladder.css');
-
-          // Ladder rungs.
-          foreach ($rows as $row) {
-            // @todo add status based on flag.
-            $output .= '<div class="ladder clearfix"><div class="' . implode(' ', $row['classes']) . '"><div class="rung-line"></div></div>';
-            $output .= '<span class="title">' . $row['title'] .'</span>';
-            if (isset($row['flag_complete'])) {
-              $output .= '<span class="flag_complete">'. $row['flag_complete'] . '</span>';
-            }
-            if ($is_maintainer && isset($row['flag_provisional'])) {
-              $output .= '<span class="flag_provisional">'. $row['flag_provisional'] . '</span>';
-            }
-            $output .= '</div>';
-          }
-
-          $element[$delta]['#markup'] = $output;
+          $rows[] = $row;
         }
+
+        // Generate output.
+        drupal_add_css(drupal_get_path('module', 'ladder') . '/ladder.css');
+
+        // Ladder rungs.
+        foreach ($rows as $row) {
+          // @todo add status based on flag.
+          $output .= '<div class="ladder clearfix"><div class="' . implode(' ', $row['classes']) . '"><div class="rung-line"></div></div>';
+          $output .= '<span class="title">' . $row['title'] .'</span>';
+          if (isset($row['flag_complete'])) {
+            $output .= '<span class="flag_complete">'. $row['flag_complete'] . '</span>';
+          }
+          if ($is_maintainer && isset($row['flag_provisional'])) {
+            $output .= '<span class="flag_provisional">'. $row['flag_provisional'] . '</span>';
+          }
+          $output .= '</div>';
+        }
+
+        // Stick the markup into the element
+        // Use 0 as the delta, since Lessons only has one value
+        $element[0]['#markup'] = $output;
       }
       break;
   }
@@ -188,28 +163,12 @@ function ladder_get_ladders_for_lesson($lesson_nid) {
 
   // Query for ladder sections that contain the lesson nid
   $query = new EntityFieldQuery();
-  $query->entityCondition('entity_type', 'field_collection_item')
-    ->fieldCondition('field_ladder_lessons', 'target_id', $lesson_nid, '=');
-  $ladder_sections = $query->execute();
+  $query->entityCondition('entity_type', 'node')
+    ->fieldCondition('field_lessons', 'target_id', $lesson_nid, '=');
+  $ladder_nodes = $query->execute();
 
-  // If we get some results...
-  if (isset($ladder_sections['field_collection_item'])) {
-    // Loop over the returned ladder sections to determine what ladder node they
-    // belong to
-    foreach ($ladder_sections['field_collection_item'] as $ladder_section_id => $ladder_section_info) {
-      // Query for the ladder node that owns this section
-      $section_query = new EntityFieldQuery();
-      $section_query->entityCondition('entity_type', 'node')
-        ->entityCondition('bundle', 'ladder')
-        ->fieldCondition('field_ladder_sections', 'value', $ladder_section_id, '=');
-      $ladder_nodes = $section_query->execute();
-
-      // If a ladder node was found...
-      if (isset($ladder_nodes['node'])) {
-        // Add the ladder node IDs to the array
-        $ladder_nids = array_merge($ladder_nids, array_keys($ladder_nodes['node']));
-      }
-    }
+  foreach ($ladder_nodes['node'] as $nid => $ladder_node) {
+    $ladder_nids[] = $nid;
   }
 
   return $ladder_nids;

@@ -8,9 +8,9 @@ files[] = rules_i18n.i18n.inc
 files[] = rules_i18n.rules.inc
 files[] = rules_i18n.test
 
-; Information added by drush on 2012-11-05
+; Information added by drush on 2012-12-04
 version = "7.x-2.1+1-dev"
 core = "7.x"
 project = "rules"
-datestamp = "1352076372"
+datestamp = "1354582610"
 

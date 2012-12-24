@@ -20,7 +20,7 @@ Customize and extend Learn
 
 
 Basic Installation
-------------------
+-------------------
 Drupal Ladder is available as full Drupal distribution in tgz and zip format at:
 http://drupal.org/project/drupalladder.
 

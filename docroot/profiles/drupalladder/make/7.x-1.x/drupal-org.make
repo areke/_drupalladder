@@ -14,7 +14,7 @@ api = 2
 projects[ctools][version] = 1.2
 projects[ctools][subdir] = contrib
 
-projects[devel][version] = 1.2
+projects[devel][version] = 1.3
 projects[devel][subdir] = contrib
 
 projects[diff][version] = 2.0
@@ -29,25 +29,29 @@ projects[entityreference][subdir] = contrib
 projects[examples][version] = 1.x-dev
 projects[examples][subdir] = contrib
 
+projects[extlink][version] = 1.12
+projects[extlink][subdir] = contrib
+
 projects[features][version] = 1.0
 projects[features][subdir] = contrib
 
-projects[feeds][version] = 2.0-alpha4
+projects[feeds][version] = 2.0-alpha7
 projects[feeds][subdir] = contrib
-
-projects[field_collection][version] = 1.0-beta4
-projects[field_collection][subdir] = contrib
 
 projects[field_group][version] = 1.1
 projects[field_group][subdir] = contrib
 
 projects[flag][version] = 2.0
 projects[flag][subdir] = contrib
+; Patch a but that causes a Strict Warning
+; drupalladder issue: http://drupal.org/node/1834992
+; Flag patch: http://drupal.org/node/1475040#comment-6599260
+projects[flag][patch][] = http://drupal.org/files/flag-fix_method_declaration-1475040-15.patch
 
-projects[job_scheduler][version] = 2.0-alpha2
+projects[job_scheduler][version] = 2.0-alpha3
 projects[job_scheduler][subdir] = contrib
 
-projects[ladder][version] = 1.0-alpha4
+projects[ladder][version] = 1.0-alpha6
 projects[ladder][subdir] = contrib
 
 projects[lessons][version] = 1.0-alpha10
@@ -65,7 +69,7 @@ projects[node_export][download][branch] = 7.x-3.x
 projects[node_export][download][revision] = 301c61096282cebfdfd23ee64aef7d194f3138e7
 projects[node_export][subdir] = contrib
 
-projects[panels][version] = 3.2
+projects[panels][version] = 3.3
 projects[panels][subdir] = contrib
 
 projects[pathauto][version] = 1.2
