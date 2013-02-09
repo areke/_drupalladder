@@ -93,10 +93,12 @@ function ajax_example_node_load($nodes, $types) {
   $result = db_query('SELECT * FROM {ajax_example_node_form_alter} WHERE nid IN(:nids)', array(':nids' => array_keys($nodes)))->fetchAllAssoc('nid');
 
   foreach ($nodes as &$node) {
-    $node->ajax_example['example_1'] = isset($result[$node->nid]->example_1) ?
-                                       $result[$node->nid]->example_1 : 0;
-    $node->ajax_example['example_2'] = isset($result[$node->nid]->example_2) ?
-                                       $result[$node->nid]->example_2 : '';
+    $node->ajax_example['example_1'] =
+      isset($result[$node->nid]->example_1) ?
+      $result[$node->nid]->example_1 : 0;
+    $node->ajax_example['example_2'] =
+      isset($result[$node->nid]->example_2) ?
+      $result[$node->nid]->example_2 : '';
   }
 }
 
@@ -106,13 +108,15 @@ function ajax_example_node_load($nodes, $types) {
  * @see ajax_example_form_node_form_alter()
  */
 function ajax_example_node_insert($node) {
-  db_insert('ajax_example_node_form_alter')
-    ->fields(array(
-      'nid' => $node->nid,
-      'example_1' => $node->ajax_example['example_1'],
-      'example_2' => $node->ajax_example['example_2'],
-    ))
-    ->execute();
+  if (isset($node->ajax_example)) {
+    db_insert('ajax_example_node_form_alter')
+      ->fields(array(
+        'nid' => $node->nid,
+        'example_1' => $node->ajax_example['example_1'],
+        'example_2' => $node->ajax_example['example_2'],
+      ))
+      ->execute();
+  }
 }
 
 /**

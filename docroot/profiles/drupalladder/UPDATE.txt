@@ -1,0 +1,37 @@
+Upgrading 1.0-alpha14 (and earlier) to 1.0-alpha15 (and later)
+==============================================================
+
+Upgrading a Drupal Ladder site from 1.0-alpha14 (and earlier) to 1.0-alpha15 (and later) requires some extra steps. The full extent will vary (for example, step 1 is only required for sites created before August 2012, give or take), but all of the drush commands below can be run safely on any site, as long as they are run in order.
+
+These instructions assume you have the latest versions of the druaplladder install profile, and lessons and ladder modules. That is, versions of at least:
+
+* drupalladder: 7.x-1.0-alpha17
+* lessons: 7.x-1.0-alpha10
+* ladder: 7.x-1.0-alpha6
+
+
+1. Set the install profile
+--------------------------
+At some point before this release, the project name was changed from `learn` to `drupalladder`. Older installations—like the one on drupalladder.org—may still be set to use the old install profile name. The first drush command below ensures that the install profile is set correctly.
+
+    drush vset install_profile "drupalladder" # Set install profile name
+
+2. Clear the caches (just in case)
+----------------------------------
+    drush cc all # Clear the caches, just in case
+
+3. Revert Features modules
+--------------------------
+The Ladder module has some new Features components, and other modules have changed because of it
+
+    drush fr lessons_uuid lessons_lists ladder --force --yes
+
+4. Run the database updates
+---------------------------
+This will update any contrib modules, and convert the old Curriculum Nodes to the new Ladder node type.
+
+    drush updb -y
+
+5. Delete the old Curriculum node type
+--------------------------------------
+    drush php-eval "node_type_delete('curriculum');"

@@ -16,14 +16,14 @@ function lessons_recommendations_views_api() {
  */
 function lessons_recommendations_flag_default_flags() {
   $flags = array();
-  // Exported flag: "Recommend lessons and curriculums".
+  // Exported flag: "Recommend lessons and ladders".
   $flags['lessons_recommend'] = array(
     'content_type' => 'node',
-    'title' => 'Recommend lessons and curriculums',
+    'title' => 'Recommend lessons and ladders',
     'global' => '0',
     'types' => array(
       0 => 'lesson',
-      1 => 'curriculum',
+      1 => 'ladder',
     ),
     'flag_short' => 'Not recommended',
     'flag_long' => 'Not recommended',

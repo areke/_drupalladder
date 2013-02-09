@@ -28,7 +28,7 @@ function lessons_maintainers_strongarm() {
         ),
         'author_published' => '1',
         'create' => array(
-          'curriculum' => 0,
+          'ladder' => 0,
           'lesson' => 0,
           'page' => 0,
         ),
@@ -49,8 +49,8 @@ function lessons_maintainers_strongarm() {
         ),
       ),
     ),
-    'curriculum' => array(
-      'field_curriculum_maintainers' => array(
+    'ladder' => array(
+      'field_ladder_maintainers' => array(
         'referenced' => array(
           'view' => 'view',
           'update' => 'update',
@@ -62,7 +62,7 @@ function lessons_maintainers_strongarm() {
         'referenced_published' => '1',
         'create' => array(
           'page' => 0,
-          'curriculum' => 0,
+          'ladder' => 0,
           'lesson' => 0,
         ),
         'author' => array(

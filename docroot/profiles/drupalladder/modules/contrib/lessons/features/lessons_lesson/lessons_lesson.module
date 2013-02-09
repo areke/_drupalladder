@@ -34,8 +34,8 @@ function lessons_lesson_block_view($delta = '') {
         'title' => t('Create new lesson'),
       );
       $links[] = array(
-        'href' => 'node/add/curriculum',
-        'title' => t('Create new curriculum'),
+        'href' => 'node/add/ladder',
+        'title' => t('Create new ladder'),
       );
 
       $block['subject'] = t('Submit Lessons');

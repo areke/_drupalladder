@@ -6,8 +6,8 @@
  * Perform actions to set up the site for this profile.
  */
 function drupalladder_install() {
-  // Note: These filters are stored in the feature module drupalladder_text_format_filters. 
-  // But if this step is omitted, we get a big ugly error during installation. This 
+  // Note: These filters are stored in the feature module drupalladder_text_format_filters.
+  // But if this step is omitted, we get a big ugly error during installation. This
   // is probably triggered by the node_save, using one of these input formats, at the end
   // of installation. These filter_format_save()s can be removed when this issue is resolved.
   //
@@ -72,8 +72,8 @@ function drupalladder_install() {
   $admin_theme = 'seven';
   $values = array(
     array(
-      'module' => 'drualladder_get_involved',
-      'delta' => 'drualladder_get_involved_contribute',
+      'module' => 'join',
+      'delta' => 'join_contribute',
       'theme' => $default_theme,
       'status' => 1,
       'weight' => 0,
@@ -82,8 +82,8 @@ function drupalladder_install() {
       'cache' => -1,
     ),
     array(
-      'module' => 'drualladder_get_involved',
-      'delta' => 'drualladder_get_involved_download',
+      'module' => 'join',
+      'delta' => 'join_download',
       'theme' => $default_theme,
       'status' => 1,
       'weight' => 0,
@@ -92,8 +92,8 @@ function drupalladder_install() {
       'cache' => -1,
     ),
     array(
-      'module' => 'drualladder_get_involved',
-      'delta' => 'drualladder_get_involved_join',
+      'module' => 'join',
+      'delta' => 'join_join',
       'theme' => $default_theme,
       'status' => 1,
       'weight' => 0,
@@ -191,9 +191,9 @@ function drupalladder_install() {
   // Insert default pre-defined node types into the database. For a complete
   // list of available node type attributes, refer to the node type API
   // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
-  // 
+  //
   // Note: Page is stored in a feature module. Including this node_type_save()
-  // is a quick fix to get the node_save() below to save the body field. 
+  // is a quick fix to get the node_save() below to save the body field.
   // @todo It would be better to get drupalladder_page module to actually load and then remove
   // the node_type_save() here.
   $types = array(
@@ -324,7 +324,7 @@ function drupalladder_install() {
   $node->menu['parent'] = 'main-menu:0';
   $node->menu['menu_name'] = 'main-menu';
   $node->menu['weight'] = 0;
-  $node->menu['description'] = 'About Learn Drupal';
+  $node->menu['description'] = 'About Drupal Ladder';
   $node = node_save($node);
 
   // Documentation and references page.
@@ -352,7 +352,7 @@ function drupalladder_install() {
  * Note: This should be replaced with a proper page callback or a view
  * of documentation nodes, or something.
  *
- * @return 
+ * @return
  *  HTML for documentation node.
  */
 function _drupalladder_documentation() {
@@ -449,5 +449,5 @@ function _drupalladder_documentation() {
   <a href="http://groups.drupal.org/html5/drupal-8">HTML 5</a>
   <a href="http://groups.drupal.org/mobile/drupal-8">Mobile Initiative</a>
   <a href="http://groups.drupal.org/internationalization">Multilingual</a>
-</div>';  
+</div>';
 }
